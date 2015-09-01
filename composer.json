@@ -1,0 +1,25 @@
+{
+    "name": "firehed/inputobjects",
+    "description": "A collection of InputObjects to be used with firehed/input",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Firehed\\InputObjects\\": ["src/", "tests/"]
+        }
+    },
+     "authors": [
+        {
+            "name": "Eric Stern",
+            "email": "eric@ericstern.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "sebastian/money": "^1.6",
+        "firehed/input": "^0.0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "firehed/arctools": "^1.0"
+    }
+}
