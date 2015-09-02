@@ -11,7 +11,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
 
     private $number;
     public function setUp() {
-        $this->number = new Number;
+        $this->number = new Number();
     } // setUp
 
     // Used by:
@@ -37,9 +37,12 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
             [null, null, '', false],
             [0, null, '', false],
             [0, null, '1', true],
+            [0, null, '0.5', true],
             [0, null, '-1', false],
             [1, null, '', false],
             [null, 1, '', false],
+            [null, 1, '0', true],
+            [null, 1, '0.5', true],
             [null, 1, 'a', false],
             [null, 1, 'aa', false],
             [null, 0, '0', true],
@@ -53,8 +56,9 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
             [null, null, '1234', true],
             [null, null, 'word', false],
             [null, null, '0555', true],
-            [null, null, '1.3e7', true],
-            [null, 6, '1.3e9', false],
+            [null, null, '1.3e7', false],
+            [null, null, '0xFF', false],
+            [null, null, '0b00001111', false],
             [null, null, 1234, true],
             [null, null, true, false],
             [null, null, false, false],
@@ -66,11 +70,23 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
         return [
             ['123', 123],
             ['123.0', (float)123],
-            ['1.2e4', (float)12000],
-            ['1.2e-2', 0.012],
-            ['0xFF', 255],
+            ['0.4', 0.4],
+            ['.4', 0.4],
+            ['-123', -123],
+            ['-123.4', -123.4],
+            ['0555', 555], // We trim leading zeroes, not treat as octal
         ];
     } // evaluations
+
+    public function invalidEvaluations()
+    {
+        return [
+            ['0xFF'],
+            ['0b00110011'],
+            ['0no'],
+            ['1e2'],
+        ];
+    }
 
     // Used by:
     // testValidMax
@@ -200,5 +216,16 @@ class NumberTest extends \PHPUnit_Framework_TestCase {
             $this->number->setValue($input_value)->evaluate(),
             'Evaluated value did not match the expected output');
     } // testEvaluate
+
+    /**
+     * @covers ::evaluate
+     * @dataProvider invalidEvaluations
+     * @expectedException UnexpectedValueException
+     */
+    public function testInvalidEvaliations($input_value)
+    {
+        $this->number->setValue($input_value)->evaluate();
+    }
+
 
 }
