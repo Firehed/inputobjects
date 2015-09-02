@@ -3,7 +3,7 @@
 namespace Firehed\InputObjects;
 
 /**
- * @coversDefaultClass Firehed\Input\Objects\Number
+ * @coversDefaultClass Firehed\InputObjects\Number
  * @covers ::<protected>
  * @covers ::<private>
  */

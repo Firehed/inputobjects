@@ -5,7 +5,7 @@ namespace Firehed\InputObjects;
 use PHPUnit_Framework_MockObject_Stub_ConsecutiveCalls as OCC;
 
 /**
- * @coversDefaultClass Firehed\Input\Objects\ListOf
+ * @coversDefaultClass Firehed\InputObjects\ListOf
  */
 class ListOfTest extends \PHPUnit_Framework_TestCase {
 

@@ -3,7 +3,7 @@
 namespace Firehed\InputObjects;
 
 /**
- * @coversDefaultClass Firehed\Input\Objects\Enum
+ * @coversDefaultClass Firehed\InputObjects\Enum
  * @covers ::<protected>
  * @covers ::<private>
  */

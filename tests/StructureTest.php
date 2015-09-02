@@ -3,7 +3,7 @@
 namespace Firehed\InputObjects;
 
 /**
- * @coversDefaultClass Firehed\Input\Objects\Structure
+ * @coversDefaultClass Firehed\InputObjects\Structure
  * @covers ::<protected>
  * @covers ::<private>
  * */
@@ -13,7 +13,7 @@ class StructureTest extends \PHPUnit_Framework_TestCase {
      * @covers ::evaluate
      */
     public function testExecuteValidData() {
-        $structure = $this->getMockForAbstractClass('Firehed\Input\Objects\Structure');
+        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->atLeastOnce())
             ->method('getRequiredInputs')
             ->will($this->returnValue(['string' => new Text()]));
@@ -31,7 +31,7 @@ class StructureTest extends \PHPUnit_Framework_TestCase {
      * @expectedException UnexpectedValueException
      */
     public function testExecuteInvalidData() {
-        $structure = $this->getMockForAbstractClass('Firehed\Input\Objects\Structure');
+        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->atLeastOnce())
             ->method('getRequiredInputs')
             ->will($this->returnValue(['string' => new Text()]));
@@ -45,7 +45,7 @@ class StructureTest extends \PHPUnit_Framework_TestCase {
      * @dataProvider nonArrays
      * */
     public function testNonArrayInput($input) {
-        $structure = $this->getMockForAbstractClass('Firehed\Input\Objects\Structure');
+        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->any())
             ->method('getRequiredInputs')
             ->will($this->returnValue([]));
