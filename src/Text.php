@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
@@ -10,7 +12,8 @@ class Text extends InputObject {
     private $min = null;
     private $max = null;
 
-    public function setMin($min) {
+    public function setMin($min): self
+    {
         if (!is_int($min)) {
             throw new InvalidArgumentException(
                 "Integer required");
@@ -29,7 +32,8 @@ class Text extends InputObject {
         return $this;
     } // setMin
 
-    public function setMax($max) {
+    public function setMax($max): self
+    {
         if (!is_int($max)) {
             throw new InvalidArgumentException(
                 "Integer required");
@@ -46,7 +50,8 @@ class Text extends InputObject {
         return $this;
     } // setMax
 
-    protected function validate($value) {
+    protected function validate($value): bool
+    {
         if (!is_string($value)) {
             return false;
         }

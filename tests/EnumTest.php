@@ -27,7 +27,8 @@ class EnumTest extends \PHPUnit_Framework_TestCase {
 
 class EnumTestFixture extends Enum {
 
-    protected function getValidValues() {
+    protected function getValidValues(): array
+    {
         return [
             'hello',
             'goodbye',

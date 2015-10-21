@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Containers\ParsedInput;
@@ -13,7 +15,8 @@ abstract class Structure extends InputObject implements
 
     private $validated;
 
-    protected function validate($value) {
+    protected function validate($value): bool
+    {
         if (!is_array($value)) {
             return false;
         }
@@ -27,7 +30,8 @@ abstract class Structure extends InputObject implements
         }
     } // validate
 
-    public function evaluate() {
+    public function evaluate()
+    {
         // Performs validation
         parent::evaluate();
         return $this->validated->asArray();

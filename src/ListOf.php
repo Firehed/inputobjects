@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
@@ -16,11 +18,13 @@ class ListOf extends InputObject {
 
     private $type;
 
-    public function __construct(InputObject $type) {
+    public function __construct(InputObject $type)
+    {
         $this->type = $type;
     } // __construct
 
-    protected function validate($value) {
+    protected function validate($value): bool
+    {
         if (!is_array($value)) {
             return false;
         }
@@ -38,7 +42,8 @@ class ListOf extends InputObject {
         return true;
     } // validate
 
-    public function evaluate() {
+    public function evaluate()
+    {
         $values = parent::evaluate();
         foreach ($values as $key => $value) {
             $values[$key] = $this->type->setValue($value)->evaluate();

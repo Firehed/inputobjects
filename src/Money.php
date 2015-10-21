@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
 
 use SebastianBergmann\Money as M;
@@ -16,7 +18,7 @@ use SebastianBergmann\Money as M;
 class Money extends Structure
 {
 
-    public function getRequiredInputs()
+    public function getRequiredInputs(): array
     {
         return [
             'amount' => new WholeNumber(),
@@ -24,12 +26,12 @@ class Money extends Structure
         ];
     }
 
-    public function getOptionalInputs()
+    public function getOptionalInputs(): array
     {
         return [];
     }
 
-    public function evaluate()
+    public function evaluate(): M\Money
     {
         $ret = parent::evaluate();
         return new M\Money($ret['amount'], new M\Currency($ret['currency']));

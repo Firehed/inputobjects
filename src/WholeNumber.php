@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
 
 /**
@@ -9,7 +12,7 @@ namespace Firehed\InputObjects;
  */
 class WholeNumber extends Number
 {
-    protected function validate($value)
+    protected function validate($value): bool
     {
         if (!parent::validate($value)) {
             return false;

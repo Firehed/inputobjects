@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
 
 use InvalidArgumentException;
@@ -10,7 +12,8 @@ class Number extends InputObject {
     private $min = null;
     private $max = null;
 
-    public function setMin($min) {
+    public function setMin($min): self
+    {
         if (!is_int($min) && !is_float($min)) {
             throw new InvalidArgumentException(
                 'Minimum must be an integer or float');
@@ -24,7 +27,8 @@ class Number extends InputObject {
         return $this;
     } // setMin
 
-    public function setMax($max) {
+    public function setMax($max): self
+    {
         if (!is_int($max) && !is_float($max)) {
             throw new InvalidArgumentException(
                 'Maximum must be an integer or float');
@@ -37,7 +41,8 @@ class Number extends InputObject {
         return $this;
     } // setMax
 
-    protected function validate($value) {
+    protected function validate($value): bool
+    {
         if (!is_numeric($value)) {
             return false;
         }
@@ -48,6 +53,7 @@ class Number extends InputObject {
         // ensure the input value contains only number characters. ctype_digit
         // blocks decimal points and negative signs, and there's no practical
         // way to do the check with casting alone.
+        $value = (string)$value;
         if (!preg_match('/^-?[0-9]*\.?[0-9]+$/', $value)) {
             return false;
         }
@@ -65,7 +71,8 @@ class Number extends InputObject {
         return true;
     } // validate
 
-    public function evaluate() {
+    public function evaluate()
+    {
         return $this->getValue() + 0;
     } // evaluate
 
