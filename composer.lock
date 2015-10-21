@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6fd5f259ce51c95f4f43d663b3d925da",
-    "content-hash": "68160372bfe889a6bb8595f646a7b3be",
+    "hash": "dc38cf9b7c0a0ae26bb3f887e1b7d5ae",
+    "content-hash": "a35e3cb375102e8df411c1ebe5752ea9",
     "packages": [
         {
             "name": "firehed/input",
-            "version": "0.0.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Firehed/input.git",
-                "reference": "cedc0169a50ec4d5dea5ca999056598924c2b9d1"
+                "reference": "368f8f3c8ea70b66a52896bee3dccfc21da702a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Firehed/input/zipball/cedc0169a50ec4d5dea5ca999056598924c2b9d1",
-                "reference": "cedc0169a50ec4d5dea5ca999056598924c2b9d1",
+                "url": "https://api.github.com/repos/Firehed/input/zipball/368f8f3c8ea70b66a52896bee3dccfc21da702a1",
+                "reference": "368f8f3c8ea70b66a52896bee3dccfc21da702a1",
                 "shasum": ""
             },
             "require-dev": {
@@ -45,7 +45,7 @@
                 }
             ],
             "description": "PHP Input Handling Tools",
-            "time": "2015-09-17 22:13:29"
+            "time": "2015-10-21 18:10:30"
         },
         {
             "name": "sebastian/money",

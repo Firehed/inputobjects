@@ -16,7 +16,7 @@
     "minimum-stability": "alpha",
     "require": {
         "sebastian/money": "^1.6",
-        "firehed/input": "0.*"
+        "firehed/input": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
