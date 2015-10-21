@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f83286f8d2c8f5fdb473a0ee091dcea5",
-    "content-hash": "4e68613ef186d87b6c8ef14719e6a020",
+    "hash": "5cd7226b37c05e9376cfbf0f53ae35ce",
+    "content-hash": "207f5767e3d452c26d42d2775dc24828",
     "packages": [
         {
             "name": "firehed/input",
@@ -1177,6 +1177,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7"
+    },
     "platform-dev": []
 }
