@@ -7,7 +7,7 @@ use PHPUnit_Framework_MockObject_Stub_ConsecutiveCalls as OCC;
 /**
  * @coversDefaultClass Firehed\InputObjects\ListOf
  */
-class ListOfTest extends \PHPUnit_Framework_TestCase {
+class ListOfTest extends \PHPUnit\Framework\TestCase {
 
     /** @covers ::__construct */
     public function testConstruct() {

@@ -7,7 +7,7 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  */
-class WholeNumberTest extends \PHPUnit_Framework_TestCase
+class WholeNumberTest extends \PHPUnit\Framework\TestCase
 {
 
     private $number;

@@ -5,7 +5,7 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  */
-class MoneyTest extends \PHPUnit_Framework_TestCase
+class MoneyTest extends \PHPUnit\Framework\TestCase
 {
 
     /** @covers ::evaluate */
