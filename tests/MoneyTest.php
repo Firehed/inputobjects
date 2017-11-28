@@ -1,11 +1,17 @@
 <?php
+declare(strict_types=1);
+
 namespace Firehed\InputObjects;
+
+use Money\Currency;
+use Money\Money as BaseMoney;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Money
  * @covers ::<protected>
  * @covers ::<private>
  */
-class MoneyTest extends \PHPUnit_Framework_TestCase
+class MoneyTest extends \PHPUnit\Framework\TestCase
 {
 
     /** @covers ::evaluate */
@@ -15,10 +21,12 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $money->setValue(['amount' => 50, 'currency' => 'XTS']);
         $this->assertTrue($money->isValid());
         $obj = $money->evaluate();
-        $this->assertInstanceOf('SebastianBergmann\Money\Money', $obj);
-        $this->assertSame(50, $obj->getAmount());
-        $this->assertEquals(new \SebastianBergmann\Money\Currency('XTS'),
-            $obj->getCurrency());
+        $this->assertInstanceOf(BaseMoney::class, $obj);
+        $this->assertSame('50', $obj->getAmount());
+        $this->assertEquals(
+            new Currency('XTS'),
+            $obj->getCurrency()
+        );
     }
 
 
@@ -29,10 +37,12 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $money->setValue(['amount' => -50, 'currency' => 'XTS']);
         $this->assertTrue($money->isValid());
         $obj = $money->evaluate();
-        $this->assertInstanceOf('SebastianBergmann\Money\Money', $obj);
-        $this->assertSame(-50, $obj->getAmount());
-        $this->assertEquals(new \SebastianBergmann\Money\Currency('XTS'),
-            $obj->getCurrency());
+        $this->assertInstanceOf(BaseMoney::class, $obj);
+        $this->assertSame('-50', $obj->getAmount());
+        $this->assertEquals(
+            new Currency('XTS'),
+            $obj->getCurrency()
+        );
     }
 
     /**
@@ -80,11 +90,11 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
         $money->setValue(['amount' => '50', 'currency' => 'XTS']);
         $this->assertTrue($money->isValid());
         $obj = $money->evaluate();
-        $this->assertInstanceOf('SebastianBergmann\Money\Money', $obj);
-        $this->assertSame(50, $obj->getAmount());
-        $this->assertEquals(new \SebastianBergmann\Money\Currency('XTS'),
-            $obj->getCurrency());
-     }
-
-
+        $this->assertInstanceOf(BaseMoney::class, $obj);
+        $this->assertSame('50', $obj->getAmount());
+        $this->assertEquals(
+            new Currency('XTS'),
+            $obj->getCurrency()
+        );
+    }
 }

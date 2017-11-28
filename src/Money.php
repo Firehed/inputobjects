@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
-use SebastianBergmann\Money as M;
+use Money\Currency;
+use Money\Money as BaseMoney;
 
 /**
  * Define a common Money input structure that, when evaluated, returns a Money
@@ -31,10 +32,11 @@ class Money extends Structure
         return [];
     }
 
-    public function evaluate(): M\Money
+    public function evaluate(): BaseMoney
     {
         $ret = parent::evaluate();
-        return new M\Money($ret['amount'], new M\Currency($ret['currency']));
-    }
+        $currency = new Currency($ret['currency']);
 
+        return new BaseMoney($ret['amount'], $currency);
+    }
 }

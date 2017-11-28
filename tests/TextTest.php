@@ -7,7 +7,7 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  */
-class TextTest extends \PHPUnit_Framework_TestCase {
+class TextTest extends \PHPUnit\Framework\TestCase {
 
     private $string;
     public function setUp() {

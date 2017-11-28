@@ -7,7 +7,7 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  * */
-class StructureTest extends \PHPUnit_Framework_TestCase {
+class StructureTest extends \PHPUnit\Framework\TestCase {
 
     /**
      * @covers ::evaluate

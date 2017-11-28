@@ -2,12 +2,14 @@
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
 use PHPUnit_Framework_MockObject_Stub_ConsecutiveCalls as OCC;
+use UnexpectedValueException;
 
 /**
  * @coversDefaultClass Firehed\InputObjects\ListOf
  */
-class ListOfTest extends \PHPUnit_Framework_TestCase {
+class ListOfTest extends \PHPUnit\Framework\TestCase {
 
     /** @covers ::__construct */
     public function testConstruct() {
@@ -47,7 +49,7 @@ class ListOfTest extends \PHPUnit_Framework_TestCase {
      * @dataProvider values
      */
     public function testEvaluate($input, $mock_returns, $is_valid) {
-        $io = $this->getMock('Firehed\Input\Objects\InputObject',
+        $io = $this->createMock(InputObject::class,
             ['validate', 'evaluate']);
         $map = [];
         $out_map = [];
@@ -68,10 +70,8 @@ class ListOfTest extends \PHPUnit_Framework_TestCase {
                 ->will(new OCC($out_map));
             $this->assertSame($out_map, $list_of->evaluate(),
                 'The evaluated list did not return the child evaluate() values');
-        }
-        else {
-
-            $this->setExpectedException('UnexpectedValueException');
+        } else {
+            $this->expectException(UnexpectedValueException::class);
             $list_of->evaluate();
         }
     } // testEvaluate

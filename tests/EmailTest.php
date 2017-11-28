@@ -7,7 +7,7 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  */
-class EmailTest extends \PHPUnit_Framework_TestCase
+class EmailTest extends \PHPUnit\Framework\TestCase
 {
 
     private $email;
