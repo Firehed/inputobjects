@@ -6,10 +6,11 @@ namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
 
-abstract class Enum extends InputObject {
+abstract class Enum extends InputObject
+{
 
     /**
-     * @param mixed value to validate
+     * @param mixed $value value to validate
      * @return bool
      */
     final protected function validate($value): bool
@@ -21,5 +22,4 @@ abstract class Enum extends InputObject {
      * @return array<string>
      */
     abstract protected function getValidValues(): array;
-
 }

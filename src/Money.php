@@ -14,7 +14,6 @@ use Money\Money as BaseMoney;
  * Expects a dictionary containing two fields:
  * - amount: an integer in the base unit of currency ($1.50 would be 150)
  * - currency: the 3-character ISO code of the currency
- *
  */
 class Money extends Structure
 {

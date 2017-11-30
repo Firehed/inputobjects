@@ -14,7 +14,9 @@ use Money\Money as BaseMoney;
 class MoneyTest extends \PHPUnit\Framework\TestCase
 {
 
-    /** @covers ::evaluate */
+    /**
+     * @covers ::evaluate
+     */
     public function testEvaluateReturnsMoney()
     {
         $money = new Money();
@@ -30,7 +32,9 @@ class MoneyTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /** @covers ::evaluate */
+    /**
+     * @covers ::evaluate
+     */
     public function testValidNegativeAmount()
     {
         $money = new Money();

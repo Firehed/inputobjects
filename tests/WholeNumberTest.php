@@ -71,7 +71,7 @@ class WholeNumberTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-   /**
+    /**
      * @covers ::setMax
      * @covers ::setMin
      * @covers ::validate
@@ -86,9 +86,11 @@ class WholeNumberTest extends \PHPUnit\Framework\TestCase
             $this->number->setMax($max);
         }
         $this->number->setValue($value);
-        $this->assertSame($isValid,
+        $this->assertSame(
+            $isValid,
             $this->number->isValid(),
-            'Validation did not match expected output');
+            'Validation did not match expected output'
+        );
     } // testValidate
 
     /**
@@ -97,9 +99,11 @@ class WholeNumberTest extends \PHPUnit\Framework\TestCase
      */
     public function testEvaluate($input_value, $expected_output)
     {
-        $this->assertSame($expected_output,
+        $this->assertSame(
+            $expected_output,
             $this->number->setValue($input_value)->evaluate(),
-            'Evaluated value did not match the expected output');
+            'Evaluated value did not match the expected output'
+        );
     } // testEvaluate
 
     /**
@@ -111,5 +115,4 @@ class WholeNumberTest extends \PHPUnit\Framework\TestCase
     {
         $this->number->setValue($input_value)->evaluate();
     }
-
 }

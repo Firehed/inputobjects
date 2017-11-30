@@ -7,7 +7,8 @@ namespace Firehed\InputObjects;
 use InvalidArgumentException;
 use Firehed\Input\Objects\InputObject;
 
-class Number extends InputObject {
+class Number extends InputObject
+{
 
     private $min = null;
     private $max = null;
@@ -16,11 +17,13 @@ class Number extends InputObject {
     {
         if (!is_int($min) && !is_float($min)) {
             throw new InvalidArgumentException(
-                'Minimum must be an integer or float');
+                'Minimum must be an integer or float'
+            );
         }
         if (null !== $this->max && $this->max < $min) {
             throw new InvalidArgumentException(
-                "Minimum cannot be greater than maximum");
+                "Minimum cannot be greater than maximum"
+            );
         }
 
         $this->min = $min;
@@ -31,11 +34,13 @@ class Number extends InputObject {
     {
         if (!is_int($max) && !is_float($max)) {
             throw new InvalidArgumentException(
-                'Maximum must be an integer or float');
+                'Maximum must be an integer or float'
+            );
         }
         if (null !== $this->min && $this->min > $max) {
             throw new InvalidArgumentException(
-                "Maximum cannot be less than minimum");
+                "Maximum cannot be less than minimum"
+            );
         }
         $this->max = $max;
         return $this;
@@ -75,5 +80,4 @@ class Number extends InputObject {
     {
         return $this->getValue() + 0;
     } // evaluate
-
 }

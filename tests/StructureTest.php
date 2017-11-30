@@ -7,12 +7,14 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  * */
-class StructureTest extends \PHPUnit\Framework\TestCase {
+class StructureTest extends \PHPUnit\Framework\TestCase
+{
 
     /**
      * @covers ::evaluate
      */
-    public function testExecuteValidData() {
+    public function testExecuteValidData()
+    {
         $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->atLeastOnce())
             ->method('getRequiredInputs')
@@ -21,16 +23,19 @@ class StructureTest extends \PHPUnit\Framework\TestCase {
             ->method('getOptionalInputs')
             ->will($this->returnValue([]));
         $ret = $structure->setValue(['string' => 'this is a string'])->evaluate();
-        $this->assertSame(['string' => 'this is a string'],
+        $this->assertSame(
+            ['string' => 'this is a string'],
             $ret,
-            'Execute should have returned an array');
-   }
+            'Execute should have returned an array'
+        );
+    }
 
     /**
      * @covers ::evaluate
      * @expectedException UnexpectedValueException
      */
-    public function testExecuteInvalidData() {
+    public function testExecuteInvalidData()
+    {
         $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->atLeastOnce())
             ->method('getRequiredInputs')
@@ -44,7 +49,8 @@ class StructureTest extends \PHPUnit\Framework\TestCase {
     /**
      * @dataProvider nonArrays
      * */
-    public function testNonArrayInput($input) {
+    public function testNonArrayInput($input)
+    {
         $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->any())
             ->method('getRequiredInputs')
@@ -53,13 +59,16 @@ class StructureTest extends \PHPUnit\Framework\TestCase {
             ->method('getOptionalInputs')
             ->will($this->returnValue([]));
         $structure->setValue($input);
-        $this->assertFalse($structure->isValid(),
-            'Input should not be valid');
+        $this->assertFalse(
+            $structure->isValid(),
+            'Input should not be valid'
+        );
     } // testNonArrayInput
 
     // -(  DataProviders  )-----------------------------------------------------
 
-    public function nonArrays() {
+    public function nonArrays()
+    {
         return [
             [null],
             [true],
@@ -69,5 +78,4 @@ class StructureTest extends \PHPUnit\Framework\TestCase {
             ["[]"],
         ];
     } // nonArrays
-
 }
