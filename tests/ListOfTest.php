@@ -58,10 +58,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
      */
     public function testEvaluate($input, $mock_returns, $is_valid)
     {
-        $io = $this->createMock(
-            InputObject::class,
-            ['validate', 'evaluate']
-        );
+        $io = $this->createMock(InputObject::class);
         $map = [];
         $out_map = [];
         foreach ($input as $i => $value) {
@@ -103,6 +100,53 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         $list_of->setValue($non_list);
         $this->assertFalse($list_of->isValid());
     } // testNonListsAreRejected
+
+    /**
+     * @covers ::setSeparator
+     */
+    public function testSetSeapratorReturnsThis()
+    {
+        $io = $this->createMock(InputObject::class);
+        $listOf = new ListOf($io);
+        $this->assertSame($listOf, $listOf->setSeparator(','));
+    }
+
+    /**
+     * @covers ::setSeparator
+     * @covers ::validate
+     * @covers ::evaluate
+     * @dataProvider separatorValues
+     */
+    public function testStringValuesAreAcceptedWithSeparator(
+        string $separator,
+        string $input,
+        array $output
+    ) {
+        $io = new Text();
+        $listOf = new ListOf($io);
+        $listOf->setSeparator($separator);
+
+        $listOf->setValue($input);
+        $this->assertSame($output, $listOf->evaluate());
+    }
+
+    public function separatorValues(): array
+    {
+        return [
+            ['#', '', []],
+            ['#', 'foo', ['foo']],
+            ['#', 'foo#bar', ['foo', 'bar']],
+            ['#', 'foo#bar#baz', ['foo', 'bar', 'baz']],
+            [',', '', []],
+            [',', 'foo', ['foo']],
+            [',', 'foo,bar', ['foo', 'bar']],
+            [',', 'foo,bar,baz', ['foo', 'bar', 'baz']],
+            ['|', '', []],
+            ['|', 'foo', ['foo']],
+            ['|', 'foo|bar', ['foo', 'bar']],
+            ['|', 'foo|bar|baz', ['foo', 'bar', 'baz']],
+        ];
+    }
 
     public function values()
     {
