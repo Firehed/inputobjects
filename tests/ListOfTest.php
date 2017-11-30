@@ -58,10 +58,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
      */
     public function testEvaluate($input, $mock_returns, $is_valid)
     {
-        $io = $this->createMock(
-            InputObject::class,
-            ['validate', 'evaluate']
-        );
+        $io = $this->createMock(InputObject::class);
         $map = [];
         $out_map = [];
         foreach ($input as $i => $value) {
@@ -103,6 +100,68 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         $list_of->setValue($non_list);
         $this->assertFalse($list_of->isValid());
     } // testNonListsAreRejected
+
+    /**
+     * @covers ::setSeparator
+     */
+    public function testSetSeapratorReturnsThis()
+    {
+        $io = $this->createMock(InputObject::class);
+        $listOf = new ListOf($io);
+        $this->assertSame($listOf, $listOf->setSeparator(','));
+    }
+
+    /**
+     * @covers ::setSeparator
+     * @covers ::validate
+     * @covers ::evaluate
+     * @dataProvider separatorValues
+     */
+    public function testStringValuesAreAcceptedWithSeparator(
+        InputObject $io,
+        string $separator,
+        string $input,
+        array $output
+    ) {
+        $listOf = new ListOf($io);
+        $listOf->setSeparator($separator);
+
+        $listOf->setValue($input);
+        $this->assertSame($output, $listOf->evaluate());
+    }
+
+    public function separatorValues(): array
+    {
+        $text = new Text();
+        $number = new Number();
+        $listOfText = (new ListOf($text))->setSeparator('|');
+        return [
+            [$text, '#', '', []],
+            [$text, '#', 'foo', ['foo']],
+            [$text, '#', 'foo#bar', ['foo', 'bar']],
+            [$text, '#', 'foo#bar#baz', ['foo', 'bar', 'baz']],
+            [$text, ',', '', []],
+            [$text, ',', 'foo', ['foo']],
+            [$text, ',', 'foo,bar', ['foo', 'bar']],
+            [$text, ',', 'foo,bar,baz', ['foo', 'bar', 'baz']],
+            [$text, '|', '', []],
+            [$text, '|', 'foo', ['foo']],
+            [$text, '|', 'foo|bar', ['foo', 'bar']],
+            [$text, '|', 'foo|bar|baz', ['foo', 'bar', 'baz']],
+            [$number, ',', '1,2,3', [1, 2, 3]],
+            [$number, ',', '1,2.3', [1, 2.3]],
+            // This should recursively decode
+            [$listOfText, ',', 'a,b,c|d|e,f,g|h,,|', [
+                ['a'],
+                ['b'],
+                ['c', 'd', 'e'],
+                ['f'],
+                ['g', 'h'],
+                [],
+                ['',''],
+            ]],
+        ];
+    }
 
     public function values()
     {

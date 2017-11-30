@@ -17,6 +17,8 @@ use Firehed\Input\Objects\InputObject;
  */
 class ListOf extends InputObject
 {
+    /** @var string */
+    private $separator;
 
     private $type;
 
@@ -26,8 +28,23 @@ class ListOf extends InputObject
         $this->type = $type;
     } // __construct
 
+    public function setSeparator(string $separator): self
+    {
+        $this->separator = $separator;
+        return $this;
+    }
+
     protected function validate($value): bool
     {
+        if (is_string($value) && $this->separator !== null) {
+            // explode(any, '') returns `['']` not `[]`; force an override
+            if ($value === '') {
+                $value = [];
+            } else {
+                $value = explode($this->separator, $value);
+            }
+            $this->setValue($value);
+        }
         if (!is_array($value)) {
             return false;
         }
