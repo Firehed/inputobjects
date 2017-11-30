@@ -24,8 +24,7 @@ abstract class Structure extends InputObject implements
         try {
             $this->validated = $parsed->validate($this);
             return true;
-        }
-        catch (InputException $e) {
+        } catch (InputException $e) {
             return false;
         }
     } // validate
@@ -36,5 +35,4 @@ abstract class Structure extends InputObject implements
         parent::evaluate();
         return $this->validated->asArray();
     } // evaluate
-
 }

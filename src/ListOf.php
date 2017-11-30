@@ -10,16 +10,19 @@ use Firehed\Input\Objects\InputObject;
  * The ListOf InputObject is used in situations where we expect to receive
  * an array of some other input type. Unlike most other InputObjects, it
  * requires explicit configuration via
+ *
  * @{method:setType@Firehed.Input.Objects\InputObject}. Conceptually, it applies
- * @{function@libphutil:assert_instances_of} to each item in the provided
+ * @{function@libphutil:assert_instances_of}            to each item in the provided
  * array.
  */
-class ListOf extends InputObject {
+class ListOf extends InputObject
+{
 
     private $type;
 
     public function __construct(InputObject $type)
     {
+        parent::__construct();
         $this->type = $type;
     } // __construct
 
@@ -50,5 +53,4 @@ class ListOf extends InputObject {
         }
         return $values;
     } // evaluate
-
 }

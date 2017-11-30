@@ -9,25 +9,34 @@ use UnexpectedValueException;
 /**
  * @coversDefaultClass Firehed\InputObjects\ListOf
  */
-class ListOfTest extends \PHPUnit\Framework\TestCase {
+class ListOfTest extends \PHPUnit\Framework\TestCase
+{
 
-    /** @covers ::__construct */
-    public function testConstruct() {
+    /**
+     * @covers ::__construct
+     */
+    public function testConstruct()
+    {
         $io = $this->getMockForAbstractClass('Firehed\Input\Objects\InputObject');
-        $this->assertInstanceOf('Firehed\InputObjects\ListOf',
+        $this->assertInstanceOf(
+            'Firehed\InputObjects\ListOf',
             new ListOf($io),
-            'Construct failed');
+            'Construct failed'
+        );
     } // testConstruct
 
     /**
      * @covers ::validate
      * @dataProvider values
      */
-    public function testValidate($input, $mock_returns, $is_valid) {
+    public function testValidate($input, $mock_returns, $is_valid)
+    {
         // Generally, assert that each of the input values is validated against
         // the input type provided in the constructor
-        $io = $this->getMockForAbstractClass('Firehed\Input\Objects\InputObject',
-            ['validate']);
+        $io = $this->getMockForAbstractClass(
+            'Firehed\Input\Objects\InputObject',
+            ['validate']
+        );
         $io->expects($this->atLeastOnce())
             ->method('validate')
             // ->will($this->onConsectiveCalls(...$mock_returns));
@@ -38,8 +47,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
 
         if ($is_valid) {
             $this->assertTrue($list_of->isValid(), 'Value should be valid');
-        }
-        else {
+        } else {
             $this->assertFalse($list_of->isValid(), 'Value should be invalid');
         }
     } // testValidate
@@ -48,9 +56,12 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
      * @covers ::evaluate
      * @dataProvider values
      */
-    public function testEvaluate($input, $mock_returns, $is_valid) {
-        $io = $this->createMock(InputObject::class,
-            ['validate', 'evaluate']);
+    public function testEvaluate($input, $mock_returns, $is_valid)
+    {
+        $io = $this->createMock(
+            InputObject::class,
+            ['validate', 'evaluate']
+        );
         $map = [];
         $out_map = [];
         foreach ($input as $i => $value) {
@@ -68,8 +79,11 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
             $io->expects($this->atLeastOnce())
                 ->method('evaluate')
                 ->will(new OCC($out_map));
-            $this->assertSame($out_map, $list_of->evaluate(),
-                'The evaluated list did not return the child evaluate() values');
+            $this->assertSame(
+                $out_map,
+                $list_of->evaluate(),
+                'The evaluated list did not return the child evaluate() values'
+            );
         } else {
             $this->expectException(UnexpectedValueException::class);
             $list_of->evaluate();
@@ -80,7 +94,8 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
      * @dataProvider nonLists
      * @covers ::validate
      */
-    public function testNonListsAreRejected($non_list) {
+    public function testNonListsAreRejected($non_list)
+    {
         $io = $this->getMockForAbstractClass('Firehed\Input\Objects\InputObject');
         $io->expects($this->never())
             ->method('validate');
@@ -89,7 +104,8 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
         $this->assertFalse($list_of->isValid());
     } // testNonListsAreRejected
 
-    public function values() {
+    public function values()
+    {
         return [
             [['value'], [true], true],
             [['value'], [false], false],
@@ -101,7 +117,8 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
         ];
     } // values
 
-    public function nonLists() {
+    public function nonLists()
+    {
         return [
             [1],
             ['string'],
@@ -110,5 +127,4 @@ class ListOfTest extends \PHPUnit\Framework\TestCase {
             [['key' => 'value']], // dict, not list
         ];
     } // nonLists
-
 }

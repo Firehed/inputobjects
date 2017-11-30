@@ -7,17 +7,20 @@ namespace Firehed\InputObjects;
  * @covers ::<protected>
  * @covers ::<private>
  */
-class NumberTest extends \PHPUnit\Framework\TestCase {
+class NumberTest extends \PHPUnit\Framework\TestCase
+{
 
     private $number;
-    public function setUp() {
+    public function setUp()
+    {
         $this->number = new Number();
     } // setUp
 
     // Used by:
     // testInvalidMin
     // testInvalidMax
-    public function invalidRangeValues() {
+    public function invalidRangeValues()
+    {
         return [
             [null],
             [false],
@@ -32,7 +35,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
 
     // Used by:
     // testValidate
-    public function validations() {
+    public function validations()
+    {
         return [
             [null, null, '', false],
             [0, null, '', false],
@@ -66,7 +70,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
         ];
     } // validations
 
-    public function evaluations() {
+    public function evaluations()
+    {
         return [
             ['123', 123],
             ['123.0', (float)123],
@@ -91,7 +96,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
     // Used by:
     // testValidMax
     // testValidMin
-    public function validRangeValues() {
+    public function validRangeValues()
+    {
         return [
             [1],
             [200],
@@ -107,7 +113,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
 
     // Used by:
     // testValidMaxMinCombinations
-    public function validRangePairs() {
+    public function validRangePairs()
+    {
         return [
             [10, 5],
             [10, 10],
@@ -121,7 +128,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @dataProvider invalidRangeValues
      * @expectedException InvalidArgumentException
      */
-    public function testInvalidMax($value) {
+    public function testInvalidMax($value)
+    {
         $this->number->setMax($value);
     } // testInvalidMax
 
@@ -130,10 +138,13 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMax($value) {
-        $this->assertSame($this->number,
+    public function testValidMax($value)
+    {
+        $this->assertSame(
+            $this->number,
             $this->number->setMax($value),
-            'setMax should be chainable when called with a valid value');
+            'setMax should be chainable when called with a valid value'
+        );
     } // testValidMax
 
     /**
@@ -141,7 +152,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @dataProvider invalidRangeValues
      * @expectedException InvalidArgumentException
      */
-    public function testInvalidMin($value) {
+    public function testInvalidMin($value)
+    {
         $this->number->setMin($value);
     } // testInvalidMin
 
@@ -150,10 +162,13 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMin($value) {
-        $this->assertSame($this->number,
+    public function testValidMin($value)
+    {
+        $this->assertSame(
+            $this->number,
             $this->number->setMin($value),
-            'setMin should be chainable when called with a valid value');
+            'setMin should be chainable when called with a valid value'
+        );
     } // testValidMin
 
 
@@ -162,7 +177,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @covers ::setMin
      * @expectedException InvalidArgumentException
      */
-    public function testIncompatibleMaxAfterMin() {
+    public function testIncompatibleMaxAfterMin()
+    {
         $this->number->setMin(5)
             ->setMax(4);
     } // testIncompatibleMaxAfterMin
@@ -172,7 +188,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @covers ::setMin
      * @expectedException InvalidArgumentException
      */
-    public function testIncompatibleMinAfterMax() {
+    public function testIncompatibleMinAfterMax()
+    {
         $this->number->setMax(4)
             ->setMin(5);
     } // testIncompatibleMinAfterMax
@@ -182,10 +199,13 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @covers ::setMin
      * @dataProvider validRangePairs
      */
-    public function testValidMaxMinCombinations($max, $min) {
-        $this->assertSame($this->number,
+    public function testValidMaxMinCombinations($max, $min)
+    {
+        $this->assertSame(
+            $this->number,
             $this->number->setMax($max)->setMin($min),
-            'Specified max and min should have been compatible');
+            'Specified max and min should have been compatible'
+        );
     } // testValidMaxMinCombinations
 
     /**
@@ -194,7 +214,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
      * @covers ::validate
      * @dataProvider validations
      */
-    public function testValidate($min, $max, $value, $isValid) {
+    public function testValidate($min, $max, $value, $isValid)
+    {
         if ($min !== null) {
             $this->number->setMin($min);
         }
@@ -202,19 +223,24 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
             $this->number->setMax($max);
         }
         $this->number->setValue($value);
-        $this->assertSame($isValid,
+        $this->assertSame(
+            $isValid,
             $this->number->isValid(),
-            'Validation did not match expected output');
+            'Validation did not match expected output'
+        );
     } // testValidate
 
     /**
      * @covers ::evaluate
      * @dataProvider evaluations
      */
-    public function testEvaluate($input_value, $expected_output) {
-        $this->assertSame($expected_output,
+    public function testEvaluate($input_value, $expected_output)
+    {
+        $this->assertSame(
+            $expected_output,
             $this->number->setValue($input_value)->evaluate(),
-            'Evaluated value did not match the expected output');
+            'Evaluated value did not match the expected output'
+        );
     } // testEvaluate
 
     /**
@@ -226,6 +252,4 @@ class NumberTest extends \PHPUnit\Framework\TestCase {
     {
         $this->number->setValue($input_value)->evaluate();
     }
-
-
 }
