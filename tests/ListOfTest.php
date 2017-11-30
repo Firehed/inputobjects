@@ -134,6 +134,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     {
         $text = new Text();
         $number = new Number();
+        $listOfText = (new ListOf($text))->setSeparator('|');
         return [
             [$text, '#', '', []],
             [$text, '#', 'foo', ['foo']],
@@ -149,6 +150,16 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             [$text, '|', 'foo|bar|baz', ['foo', 'bar', 'baz']],
             [$number, ',', '1,2,3', [1, 2, 3]],
             [$number, ',', '1,2.3', [1, 2.3]],
+            // This should recursively decode
+            [$listOfText, ',', 'a,b,c|d|e,f,g|h,,|', [
+                ['a'],
+                ['b'],
+                ['c', 'd', 'e'],
+                ['f'],
+                ['g', 'h'],
+                [],
+                ['',''],
+            ]],
         ];
     }
 
