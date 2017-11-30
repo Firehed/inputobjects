@@ -118,11 +118,11 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
      * @dataProvider separatorValues
      */
     public function testStringValuesAreAcceptedWithSeparator(
+        InputObject $io,
         string $separator,
         string $input,
         array $output
     ) {
-        $io = new Text();
         $listOf = new ListOf($io);
         $listOf->setSeparator($separator);
 
@@ -132,19 +132,23 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
 
     public function separatorValues(): array
     {
+        $text = new Text();
+        $number = new Number();
         return [
-            ['#', '', []],
-            ['#', 'foo', ['foo']],
-            ['#', 'foo#bar', ['foo', 'bar']],
-            ['#', 'foo#bar#baz', ['foo', 'bar', 'baz']],
-            [',', '', []],
-            [',', 'foo', ['foo']],
-            [',', 'foo,bar', ['foo', 'bar']],
-            [',', 'foo,bar,baz', ['foo', 'bar', 'baz']],
-            ['|', '', []],
-            ['|', 'foo', ['foo']],
-            ['|', 'foo|bar', ['foo', 'bar']],
-            ['|', 'foo|bar|baz', ['foo', 'bar', 'baz']],
+            [$text, '#', '', []],
+            [$text, '#', 'foo', ['foo']],
+            [$text, '#', 'foo#bar', ['foo', 'bar']],
+            [$text, '#', 'foo#bar#baz', ['foo', 'bar', 'baz']],
+            [$text, ',', '', []],
+            [$text, ',', 'foo', ['foo']],
+            [$text, ',', 'foo,bar', ['foo', 'bar']],
+            [$text, ',', 'foo,bar,baz', ['foo', 'bar', 'baz']],
+            [$text, '|', '', []],
+            [$text, '|', 'foo', ['foo']],
+            [$text, '|', 'foo|bar', ['foo', 'bar']],
+            [$text, '|', 'foo|bar|baz', ['foo', 'bar', 'baz']],
+            [$number, ',', '1,2,3', [1, 2, 3]],
+            [$number, ',', '1,2.3', [1, 2.3]],
         ];
     }
 
