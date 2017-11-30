@@ -22,7 +22,8 @@
         "phpunit/phpunit": "^5 | ^6",
         "firehed/arctools": "^1.0",
         "phpstan/phpstan": "^0.9.0",
-        "squizlabs/php_codesniffer": "^3.1"
+        "squizlabs/php_codesniffer": "^3.1",
+        "php-coveralls/php-coveralls": "^1.0"
     },
     "scripts": {
         "test": [
