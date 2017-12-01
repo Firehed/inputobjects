@@ -19,11 +19,6 @@ class BooleanTest extends \PHPUnit\Framework\TestCase
         return new Boolean();
     }
 
-    public function validations(): array
-    {
-        return [];
-    }
-
     public function evaluations(): array
     {
         return [
