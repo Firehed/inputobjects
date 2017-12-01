@@ -2,6 +2,8 @@
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 trait InputObjectTestTrait
 {
     /**
@@ -28,6 +30,17 @@ trait InputObjectTestTrait
      * @return array
      */
     abstract public function invalidEvaluations(): array;
+
+    /**
+     * @covers ::__construct
+     */
+    public function testConstruct()
+    {
+        $this->assertInstanceOf(
+            InputObject::class,
+            $this->getInputObject()
+        );
+    }
 
     /**
      * @covers ::validate

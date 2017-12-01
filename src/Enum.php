@@ -6,8 +6,16 @@ namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
 
-abstract class Enum extends InputObject
+class Enum extends InputObject
 {
+    /** @var string[] */
+    private $validValues;
+
+    public function __construct(array $values)
+    {
+        parent::__construct();
+        $this->validValues = $values;
+    }
 
     /**
      * @param mixed $value value to validate
@@ -15,11 +23,6 @@ abstract class Enum extends InputObject
      */
     final protected function validate($value): bool
     {
-        return in_array($value, $this->getValidValues());
+        return in_array($value, $this->validValues, true);
     } // validate
-
-    /**
-     * @return array<string>
-     */
-    abstract protected function getValidValues(): array;
 }
