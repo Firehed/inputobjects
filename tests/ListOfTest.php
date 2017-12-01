@@ -3,7 +3,7 @@
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
-use PHPUnit_Framework_MockObject_Stub_ConsecutiveCalls as OCC;
+use PHPUnit\Framework\MockObject\Stub\ConsecutiveCalls as OCC;
 use UnexpectedValueException;
 
 /**
