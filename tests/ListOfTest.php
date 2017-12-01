@@ -3,7 +3,7 @@
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
-use PHPUnit_Framework_MockObject_Stub_ConsecutiveCalls as OCC;
+use PHPUnit\Framework\MockObject\Stub\ConsecutiveCalls as OCC;
 use UnexpectedValueException;
 
 /**
@@ -17,9 +17,9 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
      */
     public function testConstruct()
     {
-        $io = $this->getMockForAbstractClass('Firehed\Input\Objects\InputObject');
+        $io = $this->getMockForAbstractClass(InputObject::class);
         $this->assertInstanceOf(
-            'Firehed\InputObjects\ListOf',
+            ListOf::class,
             new ListOf($io),
             'Construct failed'
         );
@@ -34,7 +34,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         // Generally, assert that each of the input values is validated against
         // the input type provided in the constructor
         $io = $this->getMockForAbstractClass(
-            'Firehed\Input\Objects\InputObject',
+            InputObject::class,
             ['validate']
         );
         $io->expects($this->atLeastOnce())
@@ -93,7 +93,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
      */
     public function testNonListsAreRejected($non_list)
     {
-        $io = $this->getMockForAbstractClass('Firehed\Input\Objects\InputObject');
+        $io = $this->getMockForAbstractClass(InputObject::class);
         $io->expects($this->never())
             ->method('validate');
         $list_of = new ListOf($io);
