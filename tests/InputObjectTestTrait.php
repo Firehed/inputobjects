@@ -2,6 +2,8 @@
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 trait InputObjectTestTrait
 {
     /**

@@ -2,6 +2,8 @@
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Enum
  * @covers ::<protected>
@@ -9,37 +11,42 @@ namespace Firehed\InputObjects;
  */
 class EnumTest extends \PHPUnit\Framework\TestCase
 {
+    use InputObjectTestTrait;
 
-    public function testValidValue()
+    public function getInputObject(): InputObject
     {
-        $fixture = $this->getFixture();
-        $fixture->setValue('hello');
-        $this->assertTrue($fixture->isValid(), 'Should have been valid');
-        $this->assertSame(
+        return new Enum([
             'hello',
-            $fixture->evaluate(),
-            'The wrong value was returned from evaluate'
-        );
-    } // testValidValue
+            'goodbye',
+            10,
+            5.5,
+            true
+        ]);
+    }
 
-    public function testInvalidValue()
+    public function evaluations(): array
     {
-        $fixture = $this->getFixture();
-        $fixture->setValue('hola');
-        $this->assertFalse($fixture->isValid(), 'Should have been invalid');
-    } // testInvalidValues
+        return [
+            ['hello', 'hello'],
+            ['goodbye', 'goodbye'],
+            [10, 10],
+            [5.5, 5.5],
+            [true, true],
+        ];
+    }
 
-    private function getFixture(): Enum
+    public function invalidEvaluations(): array
     {
-        return new class extends Enum
-        {
-            protected function getValidValues(): array
-            {
-                return [
-                    'hello',
-                    'goodbye',
-                ];
-            }
-        };
+        return [
+            ['hola'],
+            ['10'],
+            ['10.0'],
+            [(float) 10],
+            ['5.5'],
+            ['true'],
+            [1],
+            [null],
+            [false],
+        ];
     }
 }
