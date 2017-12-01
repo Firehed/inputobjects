@@ -39,7 +39,7 @@ trait InputObjectTestTrait
         $inputObject->setValue($inputValue);
         $this->assertTrue(
             $inputObject->isValid(),
-            'Validation did not match expected output'
+            'Validation did not pass'
         );
     } // testValidate
 
