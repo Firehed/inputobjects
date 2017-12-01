@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace Firehed\InputObjects;
 
 /**
- * Define an Integer input class (called WholeNumber since int and integer are
- * becoming reserved keywords in PHP7)
- *
- * Works like Number, but rejects non-integer values
+ * This is being retained for backwards compatibiltiy only, but is deprecated.
  */
-class WholeNumber extends Number
+class WholeNumber extends Integer
 {
-    protected function validate($value): bool
+    public function __construct()
     {
-        if (!parent::validate($value)) {
-            return false;
-        }
-        $intval = (int)$value;
-        return $intval == $value;
+        parent::__construct();
+        trigger_error(
+            'Moved to Firehed\InputObjects\Integer',
+            \E_USER_DEPRECATED
+        );
     }
-
 }

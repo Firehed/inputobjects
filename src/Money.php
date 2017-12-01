@@ -21,7 +21,7 @@ class Money extends Structure
     public function getRequiredInputs(): array
     {
         return [
-            'amount' => new WholeNumber(),
+            'amount' => new Integer(),
             'currency' => (new Text())->setMin(3)->setMax(3),
         ];
     }

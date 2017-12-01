@@ -33,7 +33,7 @@
         ],
         "autofix": "phpcbf src tests",
         "phpunit": "phpunit",
-        "phpstan": "phpstan analyse -l7 src",
+        "phpstan": "phpstan analyse --no-progress -l7 src",
         "phpcs": "phpcs src"
     }
 }
