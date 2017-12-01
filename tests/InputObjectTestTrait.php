@@ -32,6 +32,17 @@ trait InputObjectTestTrait
     abstract public function invalidEvaluations(): array;
 
     /**
+     * @covers ::__construct
+     */
+    public function testConstruct()
+    {
+        $this->assertInstanceOf(
+            InputObject::class,
+            $this->getInputObject()
+        );
+    }
+
+    /**
      * @covers ::validate
      * @dataProvider evaluations
      */
