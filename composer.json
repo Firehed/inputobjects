@@ -14,7 +14,7 @@
         }
     ],
     "require": {
-        "firehed/input": "^2.0",
+        "firehed/input": "^2.1",
         "php": ">=7",
         "moneyphp/money": "^3.0"
     },
