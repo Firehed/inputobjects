@@ -2,6 +2,8 @@
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Exceptions\InputException;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Structure
  * @covers ::<protected>
@@ -32,7 +34,6 @@ class StructureTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers ::evaluate
-     * @expectedException UnexpectedValueException
      */
     public function testExecuteInvalidData()
     {
@@ -43,6 +44,8 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         $structure->expects($this->atLeastOnce())
             ->method('getOptionalInputs')
             ->will($this->returnValue([]));
+        $this->expectException(InputException::class);
+        $this->expectExceptionCode(InputException::INVALID_VALUES);
         $structure->setValue(['string' => 123])->evaluate();
     } // testExecuteInvalidData
 
