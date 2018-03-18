@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Containers\ParsedInput;
-use Firehed\Input\Exceptions\InputException;
 use Firehed\Input\Interfaces\ValidationInterface;
 use Firehed\Input\Objects\InputObject;
 
