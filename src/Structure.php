@@ -12,7 +12,6 @@ use Firehed\Input\Objects\InputObject;
 abstract class Structure extends InputObject implements
     ValidationInterface
 {
-
     private $validated;
 
     protected function validate($value): bool
@@ -21,12 +20,10 @@ abstract class Structure extends InputObject implements
             return false;
         }
         $parsed = new ParsedInput($value);
-        try {
-            $this->validated = $parsed->validate($this);
-            return true;
-        } catch (InputException $e) {
-            return false;
-        }
+        $this->validated = $parsed->validate($this);
+        // If validation fails, an exception will be thrown that matches the
+        // same format expected elsewhere, so there's no need to handle it here
+        return true;
     } // validate
 
     public function evaluate()
