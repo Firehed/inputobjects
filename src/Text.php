@@ -12,6 +12,7 @@ class Text extends InputObject
 
     private $min = null;
     private $max = null;
+    private $trim = false;
 
     public function setMin($min): self
     {
@@ -57,6 +58,12 @@ class Text extends InputObject
         return $this;
     } // setMax
 
+    public function setTrim(bool $shouldTrim): self
+    {
+        $this->trim = $shouldTrim;
+        return $this;
+    }
+
     protected function validate($value): bool
     {
         if (!is_string($value)) {
@@ -73,5 +80,14 @@ class Text extends InputObject
             }
         }
         return true;
+    }
+
+    public function evaluate()
+    {
+        $value = $this->getValue();
+        if ($this->trim) {
+            return trim($value);
+        }
+        return $value;
     }
 }

@@ -10,7 +10,8 @@ namespace Firehed\InputObjects;
 class TextTest extends \PHPUnit\Framework\TestCase
 {
 
-    private $string;
+    private $text;
+
     public function setUp()
     {
         $this->text = new Text;
@@ -187,6 +188,58 @@ class TextTest extends \PHPUnit\Framework\TestCase
             'SetMin should allow 0'
         );
     } // testMinOfZeroIsAllowed
+
+    /**
+     * @covers ::setTrim
+     */
+    public function testSetTrimReturnsThis()
+    {
+        $this->assertSame(
+            $this->text,
+            $this->text->setTrim(true),
+            'setTrim should return $this'
+        );
+    }
+
+    /**
+     * @covers ::setTrim
+     */
+    public function testTrimDefaultsToFalse()
+    {
+        $input = ' text with trailing space ';
+        $this->assertSame(
+            $input,
+            $this->text->setValue($input)->evaluate(),
+            'Trailing space should not have been trimmed'
+        );
+    }
+
+    /**
+     * @covers ::setTrim
+     */
+    public function testTrimWorksWhenEnabled()
+    {
+        $input = ' text with trailing space ';
+        $output = 'text with trailing space';
+        $this->assertSame(
+            $output,
+            $this->text->setTrim(true)->setValue($input)->evaluate(),
+            'Trailing space should have been trimmed'
+        );
+    }
+
+    /**
+     * @covers ::setTrim
+     */
+    public function testTrimAllowsExplicitFalse()
+    {
+        $input = ' text with trailing space ';
+        $this->assertSame(
+            $input,
+            $this->text->setTrim(false)->setValue($input)->evaluate(),
+            'Trailing space should not have been trimmed'
+        );
+    }
 
     /**
      * @covers ::setMax
