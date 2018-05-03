@@ -242,6 +242,19 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @covers ::validate
+     */
+    public function testTrimInteractionWithSetMin()
+    {
+        $input = ' ';
+        $this->assertFalse(
+            $this->text->setTrim(true)->setMin(1)->setValue($input)->isValid(),
+            'Only space should not validate with trim enabled and a minimum'
+        );
+    }
+
+
+    /**
      * @covers ::setMax
      * @covers ::setMin
      * @covers ::validate

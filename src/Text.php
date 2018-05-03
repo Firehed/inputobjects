@@ -69,6 +69,9 @@ class Text extends InputObject
         if (!is_string($value)) {
             return false;
         }
+        if ($this->trim) {
+            $value = trim($value);
+        }
         if (null !== $this->min) {
             if (strlen($value) < $this->min) {
                 return false;
