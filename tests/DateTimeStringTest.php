@@ -16,22 +16,25 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
 
     public function getInputObject()
     {
-        return new DateTimeString();
+        return (new DateTimeString())
+            ->setAllowUnixtime(true);
     }
 
     public function evaluations()
     {
-        return array_map(function ($string) {
+        $cases = array_map(function ($string) {
             return [$string, new DateTimeImmutable($string)];
         }, [
             '2018-05-09T22:55:30+00:00',
             '2018-05-09T22:55:30+0000',
-            '2018-05-09 10:55:30PM',
-            '5/9/2018 10:55:30PM',
-            '5/9/18 10:55:30PM',
-            '05/09/2018 10:55:30PM',
-            '05/09/18 10:55:30PM',
+            // '2018-05-09 10:55:30PM',
+            // '5/9/2018 10:55:30PM',
+            // '5/9/18 10:55:30PM',
+            // '05/09/2018 10:55:30PM',
+            // '05/09/18 10:55:30PM',
         ]);
+        $cases[] = ['1525932105', new DateTimeImmutable('@1525932105')];
+        return $cases;
     }
 
     public function invalidEvaluations()
@@ -44,7 +47,8 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
             // Just garbage
             ['not a date'],
             [true],
-            [[]],
+            [['a']],
+            [['a' => 'b']],
         ];
     }
 }
