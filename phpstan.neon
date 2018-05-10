@@ -1,0 +1,5 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+parameters:
+    ignoreErrors:
+        - '#static method Money\\Money::[A-Z]{3}\(\)#'
