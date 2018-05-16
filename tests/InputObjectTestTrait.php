@@ -77,6 +77,7 @@ trait InputObjectTestTrait
 
     /**
      * @covers ::evaluate
+     * @covers ::validate
      * @dataProvider invalidEvaluations
      * @expectedException UnexpectedValueException
      */
