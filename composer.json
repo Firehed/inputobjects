@@ -13,12 +13,9 @@
             "email": "eric@ericstern.com"
         }
     ],
-    "config": {
-        "sort-packages": true
-    },
     "require": {
-        "firehed/input": "^2.1",
         "php": ">=7",
+        "firehed/input": "^2.1",
         "moneyphp/money": "^3.0"
     },
     "require-dev": {
@@ -39,5 +36,8 @@
         "phpunit": "phpunit",
         "phpstan": "phpstan analyse --no-progress -c phpstan.neon -l7 src tests",
         "phpcs": "phpcs src tests"
+    },
+    "config": {
+        "sort-packages": true
     }
 }
