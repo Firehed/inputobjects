@@ -17,7 +17,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
      */
     public function testExecuteValidData()
     {
-        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
+        $structure = $this->getMockForAbstractClass(Structure::class);
         $structure->expects($this->atLeastOnce())
             ->method('getRequiredInputs')
             ->will($this->returnValue(['string' => new Text()]));
@@ -37,7 +37,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
      */
     public function testExecuteInvalidData()
     {
-        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
+        $structure = $this->getMockForAbstractClass(Structure::class);
         $structure->expects($this->atLeastOnce())
             ->method('getRequiredInputs')
             ->will($this->returnValue(['string' => new Text()]));
@@ -131,7 +131,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
      * */
     public function testNonArrayInput($input)
     {
-        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
+        $structure = $this->getMockForAbstractClass(Structure::class);
         $structure->expects($this->any())
             ->method('getRequiredInputs')
             ->will($this->returnValue([]));
