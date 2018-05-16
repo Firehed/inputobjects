@@ -5,6 +5,8 @@ namespace Firehed\InputObjects;
 
 use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\DateTimeString
  * @covers ::<protected>
@@ -16,8 +18,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
 
     public function getInputObject()
     {
-        return (new DateTimeString())
-            ->setAllowUnixtime(true);
+        return new DateTimeString();
     }
 
     public function evaluations()
@@ -27,28 +28,87 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         }, [
             '2018-05-09T22:55:30+00:00',
             '2018-05-09T22:55:30+0000',
-            // '2018-05-09 10:55:30PM',
-            // '5/9/2018 10:55:30PM',
-            // '5/9/18 10:55:30PM',
-            // '05/09/2018 10:55:30PM',
-            // '05/09/18 10:55:30PM',
-        ]);
-        $cases[] = ['1525932105', new DateTimeImmutable('@1525932105')];
+       ]);
         return $cases;
     }
 
     public function invalidEvaluations()
     {
         return [
+            // By default, unixtime should be blocked
+            [1525932105],
+            ['1525932105'],
             // PHP internals
             ['@1525932105'],
             ['+1 week'],
             ['last monday'],
-            // Just garbage
+            ['2018-05-09 10:55:30PM'],
+            ['5/9/2018 10:55:30PM'],
+            ['5/9/18 10:55:30PM'],
+            ['05/09/2018 10:55:30PM'],
+            ['05/09/18 10:55:30PM'],
+             // Just garbage
             ['not a date'],
             [true],
             [['a']],
             [['a' => 'b']],
         ];
+    }
+
+    /**
+     * @covers ::setReturnMutable
+     * @covers ::evaluate
+     */
+    public function testSetReturnMutable()
+    {
+        $dt = $this->getInputObject();
+        $this->assertSame(
+            $dt,
+            $dt->setReturnMutable(true),
+            'setReturnMutable should return $this'
+        );
+
+        $ret = $dt->setValue('2018-05-09T22:55:30+0000')->evaluate();
+        $this->assertInstanceOf(DateTimeInterface::class, $ret);
+        $this->assertInstanceOf(DateTime::class, $ret);
+        $this->assertNotInstanceOf(DateTimeImmutable::class, $ret);
+    }
+
+    /**
+     * @covers ::setAllowUnixtime
+     * @covers ::validate
+     * @covers ::evaluate
+     */
+    public function testSetAllowUnixtime()
+    {
+        $dt = $this->getInputObject();
+        $this->assertSame(
+            $dt,
+            $dt->setAllowUnixtime(true),
+            'setAllowUnixtime should return $this'
+        );
+        $target = new DateTimeImmutable('@1525932105');
+
+        $retStr = $dt->setValue('1525932105')->evaluate();
+        $this->assertEquals($target, $retStr, 'Unixtime string did not evaluate correctly');
+
+        $retInt = $dt->setValue(1525932105)->evaluate();
+        $this->assertEquals($target, $retInt, 'Unixtime int did not evaluate correctly');
+    }
+
+    /** @covers ::__construct */
+    public function testCustomFormats()
+    {
+        $input = '2018-05-09 10:55:30PM';
+
+        $dt = new DateTimeString(['Y-m-d g:i:sA']);
+        $ret = $dt->setValue($input)->evaluate();
+
+        $target = new DateTimeImmutable($input);
+        $this->assertEquals($target, $ret, 'Custom format did not evaluate');
+
+        // This is a default-valid format
+        $invalid = '2018-05-09T22:55:30+00:00';
+        $this->assertFalse($dt->setValue($invalid)->isValid());
     }
 }
