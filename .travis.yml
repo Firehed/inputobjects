@@ -11,7 +11,7 @@ install:
 script: "./vendor/bin/phpunit --coverage-text --whitelist src/ tests/"
 
 after_success:
-    - travis_retry php vendor/bin/coveralls
+    - travis_retry php vendor/bin/php-coveralls
 
 notifications:
   slack:
