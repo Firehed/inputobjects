@@ -202,6 +202,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @covers ::evaluate
      * @covers ::setTrim
      */
     public function testTrimDefaultsToFalse()
@@ -215,6 +216,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @covers ::evaluate
      * @covers ::setTrim
      */
     public function testTrimWorksWhenEnabled()
@@ -229,6 +231,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @covers ::evaluate
      * @covers ::setTrim
      */
     public function testTrimAllowsExplicitFalse()
@@ -257,6 +260,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @covers ::setMin
+     * @covers ::evaluate
      * @covers ::validate
      * @dataProvider validations
      */
@@ -274,5 +278,13 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->isValid(),
             'Validation did not match expected output'
         );
+        if ($isValid) {
+            // Valid values should just pass straight through
+            $this->assertSame(
+                $value,
+                $this->text->evaluate(),
+                'Evaluate returned the wrong value'
+            );
+        }
     } // testValidate
 }

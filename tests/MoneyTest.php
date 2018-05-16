@@ -10,6 +10,8 @@ use Money\Money as BaseMoney;
  * @coversDefaultClass Firehed\InputObjects\Money
  * @covers ::<protected>
  * @covers ::<private>
+ * @covers ::getRequiredInputs
+ * @covers ::getOptionalInputs
  */
 class MoneyTest extends \PHPUnit\Framework\TestCase
 {
