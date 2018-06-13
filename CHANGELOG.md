@@ -1,8 +1,30 @@
-# Change Log
+# Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [3.0.4] - 2018-06-12
+### Added
+- `DateTime` validator
+- `Any` validator
+- `Nullable` validator
+
+### Fixed
+- Resolved issue in validator test trait so evaluations that return objects test as you probably intended (e.g. shallow comparison)
+
+## [3.0.3] - 2018-05-03
+### Fixed
+- Resolved issue on Text validator where `setMin` and `setTrim` would conflict
+
+## [3.0.2] - 2018-03-26
+### Added
+- Added `setTrim()` method to Text validator
+
+## [3/0/1] - 2018-03-19
+### Added
+- Added support for validation error message propagation and access, particularly in structure objects
+
 
 ## [3.0.0] - 2017-12-01
 ### Added
