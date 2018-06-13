@@ -23,7 +23,7 @@ trait InputObjectTestTrait
     abstract public function evaluations(): array;
 
     /**
-     * Data provider for testInvalidEvaliations.
+     * Data provider for testInvalidEvaluations.
      *
      * Should return an arrat of [invalid_input]
      *
@@ -81,7 +81,7 @@ trait InputObjectTestTrait
      * @dataProvider invalidEvaluations
      * @expectedException UnexpectedValueException
      */
-    public function testInvalidEvaliations($input_value)
+    public function testInvalidEvaluations($input_value)
     {
         $inputObject = $this->getInputObject();
         $inputObject->setValue($input_value)->evaluate();
