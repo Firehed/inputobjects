@@ -5,6 +5,7 @@ namespace Firehed\InputObjects;
 
 use Firehed\Input\Exceptions\InputException;
 use Firehed\Input\Objects\InputObject;
+use LogicException;
 
 class AnyOf extends InputObject
 {
@@ -41,6 +42,6 @@ class AnyOf extends InputObject
             } catch (InputException $e) {
             }
         }
-        throw new \Exception('uhoh');
+        throw new LogicException('No valid value was found during evaluate despite validate passing. Please file a bug with a reproduce case!');
     }
 }
