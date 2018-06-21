@@ -4,15 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.1.0] - 
+## [3.1.0] - 2018-06-21
 
 The changes from 3.0.4 should have been tagged as 3.1.0 since new features were added.
 In addition, there were the following changes:
 
 ### Added
+- `AnyOf` validator
+- `InlineStructure` validator
 - `Literal` validator
 - `Unixtime` validator
-- `InlineStructure` validator
 
 ## [3.0.4] - 2018-06-12
 ### Added
