@@ -81,7 +81,11 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
         $diff = $dt->diff(new DateTimeImmutable());
         // On an absurdly slow system this test could fail, so this gives it
         // a little flexibility
-        $this->assertTrue(($diff->s + $diff->f) < 1, 'Should have been < 1sec from now');
+        if (version_compare(PHP_VERSION, '7.1.0', '>=')) {
+            $this->assertTrue(($diff->s + $diff->f) < 1, 'Should have been < 1sec from now');
+        } else {
+            $this->assertTrue($diff->s < 2, 'Should have been one second or less difference');
+        }
         $this->assertSame(0, $diff->i, 'Minutes != 0');
         $this->assertSame(0, $diff->h, 'Hours != 0');
         $this->assertSame(0, $diff->d, 'Days != 0');
