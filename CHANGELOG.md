@@ -17,7 +17,7 @@ In addition, there were the following changes:
 
 ## [3.0.4] - 2018-06-12
 ### Added
-- `DateTime` validator
+- `DateTimeString` validator
 - `Any` validator
 - `Nullable` validator
 
