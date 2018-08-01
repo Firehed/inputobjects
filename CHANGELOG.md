@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0] - 2018-08-01
+### Added
+- `Uuid` validator
+
 ## [3.1.0] - 2018-06-21
 
 The changes from 3.0.4 should have been tagged as 3.1.0 since new features were added.
