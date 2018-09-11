@@ -39,4 +39,13 @@ class AnyOfTest extends \PHPUnit\Framework\TestCase
             [[42]],
         ];
     }
+
+    public function testOptionalListOf()
+    {
+        $enum = new Enum(['a', 'b', 'c']);
+        $io = new AnyOf($enum, new ListOf($enum));
+        $input = ['c', 'b'];
+        $this->assertTrue($io->setValue($input)->isValid());
+        $this->assertSame($input, $io->setValue($input)->evaluate());
+    }
 }
