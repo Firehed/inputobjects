@@ -36,7 +36,7 @@ class AnyOf extends InputObject
         $value = $this->getValue();
         foreach ($this->types as $type) {
             try {
-                if ($type->isValid()) {
+                if ($type->setValue($value)->isValid()) {
                     return $type->evaluate();
                 }
             } catch (InputException $e) {
