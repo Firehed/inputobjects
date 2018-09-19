@@ -13,8 +13,7 @@ class Uuid extends InputObject
         if (!is_string($value)) {
             return false;
         }
-        $regex = '#^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$#i
-';
+        $regex = '#^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$#i';
         if (!preg_match($regex, $value)) {
             return false;
         }
