@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+## [3.2.2] - 2019-02-04
+### Summary
+- Changes some tests to improve compatibility with PHPUnit 8
 
 ## [3.2.1] - 2018-09-11
 ### Fixed
