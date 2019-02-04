@@ -2,6 +2,8 @@
 
 namespace Firehed\InputObjects;
 
+use InvalidArgumentException;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Text
  * @covers ::<protected>
@@ -86,10 +88,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @dataProvider invalidRangeValues
-     * @expectedException InvalidArgumentException
      */
     public function testInvalidMax($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->text->setMax($value);
     } // testInvalidMax
 
@@ -110,10 +112,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMin
      * @dataProvider invalidRangeValues
-     * @expectedException InvalidArgumentException
      */
     public function testInvalidMin($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->text->setMin($value);
     } // testInvalidMin
 
@@ -135,10 +137,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @covers ::setMin
-     * @expectedException InvalidArgumentException
      */
     public function testIncompatibleMaxAfterMin()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->text->setMin(5)
             ->setMax(4);
     } // testIncompatibleMaxAfterMin
@@ -146,10 +148,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @covers ::setMin
-     * @expectedException InvalidArgumentException
      */
     public function testIncompatibleMinAfterMax()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(4)
             ->setMin(5);
     } // testIncompatibleMinAfterMax
@@ -170,10 +172,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers ::setMax
-     * @expectedException InvalidArgumentException
      */
     public function testMaxOfZeroIsDisallowed()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(0);
     } // testMaxOfZeroIsDisallowed
 

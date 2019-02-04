@@ -3,6 +3,7 @@
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
+use UnexpectedValueException;
 
 trait InputObjectTestTrait
 {
@@ -79,11 +80,11 @@ trait InputObjectTestTrait
      * @covers ::evaluate
      * @covers ::validate
      * @dataProvider invalidEvaluations
-     * @expectedException UnexpectedValueException
      */
     public function testInvalidEvaluations($input_value)
     {
         $inputObject = $this->getInputObject();
+        $this->expectException(UnexpectedValueException::class);
         $inputObject->setValue($input_value)->evaluate();
     }
 }
