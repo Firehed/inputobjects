@@ -2,6 +2,9 @@
 
 namespace Firehed\InputObjects;
 
+use InvalidArgumentException;
+use UnexpectedValueException;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Number
  * @covers ::<protected>
@@ -126,10 +129,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @dataProvider invalidRangeValues
-     * @expectedException InvalidArgumentException
      */
     public function testInvalidMax($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->number->setMax($value);
     } // testInvalidMax
 
@@ -150,10 +153,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMin
      * @dataProvider invalidRangeValues
-     * @expectedException InvalidArgumentException
      */
     public function testInvalidMin($value)
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->number->setMin($value);
     } // testInvalidMin
 
@@ -175,10 +178,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @covers ::setMin
-     * @expectedException InvalidArgumentException
      */
     public function testIncompatibleMaxAfterMin()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->number->setMin(5)
             ->setMax(4);
     } // testIncompatibleMaxAfterMin
@@ -186,10 +189,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      * @covers ::setMin
-     * @expectedException InvalidArgumentException
      */
     public function testIncompatibleMinAfterMax()
     {
+        $this->expectException(InvalidArgumentException::class);
         $this->number->setMax(4)
             ->setMin(5);
     } // testIncompatibleMinAfterMax
@@ -246,10 +249,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      * @dataProvider invalidEvaluations
-     * @expectedException UnexpectedValueException
      */
     public function testInvalidEvaliations($input_value)
     {
+        $this->expectException(UnexpectedValueException::class);
         $this->number->setValue($input_value)->evaluate();
     }
 }
