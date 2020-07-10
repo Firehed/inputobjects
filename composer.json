@@ -4,11 +4,13 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Firehed\\InputObjects\\": "src/"
+            "Firehed\\InputObjects\\": "src"
         }
     },
     "autoload-dev": {
-        "Firehed\\InputObjects\\": "tests"
+        "psr-4": {
+            "Firehed\\InputObjects\\": "tests"
+        }
     },
     "authors": [
         {
