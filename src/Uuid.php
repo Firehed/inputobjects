@@ -6,8 +6,12 @@ use Firehed\Input\Objects\InputObject;
 
 class Uuid extends InputObject
 {
+    /** @var int[] */
     private static $versions = [1, 3, 4, 5];
 
+    /**
+     * @param mixed $value
+     */
     public function validate($value): bool
     {
         if (!is_string($value)) {

@@ -20,6 +20,7 @@ class ListOf extends InputObject
     /** @var string */
     private $separator;
 
+    /** @var InputObject */
     private $type;
 
     public function __construct(InputObject $type)
@@ -34,6 +35,9 @@ class ListOf extends InputObject
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         if (is_string($value) && $this->separator !== null) {

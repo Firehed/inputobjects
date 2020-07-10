@@ -18,6 +18,9 @@ class AnyOf extends InputObject
         $this->types = $types;
     }
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         foreach ($this->types as $type) {

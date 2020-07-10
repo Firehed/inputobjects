@@ -7,6 +7,7 @@ use Firehed\Input\Objects\InputObject;
 
 class Nullable extends InputObject
 {
+    /** @var InputObject */
     private $type;
 
     public function __construct(InputObject $type)
@@ -15,6 +16,9 @@ class Nullable extends InputObject
         $this->type = $type;
     }
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         if ($value === null) {

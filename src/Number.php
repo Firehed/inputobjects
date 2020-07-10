@@ -9,10 +9,15 @@ use Firehed\Input\Objects\InputObject;
 
 class Number extends InputObject
 {
-
+    /** @var ?float */
     private $min = null;
+
+    /** @var ?float */
     private $max = null;
 
+    /**
+     * @param float $min
+     */
     public function setMin($min): self
     {
         if (!is_int($min) && !is_float($min)) {
@@ -30,6 +35,9 @@ class Number extends InputObject
         return $this;
     } // setMin
 
+    /**
+     * @param float $max
+     */
     public function setMax($max): self
     {
         if (!is_int($max) && !is_float($max)) {
@@ -46,6 +54,9 @@ class Number extends InputObject
         return $this;
     } // setMax
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         if (!is_numeric($value)) {

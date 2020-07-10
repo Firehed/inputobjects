@@ -37,6 +37,9 @@ class DateTimeString extends InputObject
     /** @var bool */
     private $returnMutable = false;
 
+    /**
+     * @param string[] $validFormats
+     */
     public function __construct(array $validFormats = [])
     {
         parent::__construct();
@@ -58,6 +61,9 @@ class DateTimeString extends InputObject
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function validate($value): bool
     {
         if ($this->allowUnixtime) {

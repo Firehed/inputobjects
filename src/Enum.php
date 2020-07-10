@@ -6,11 +6,17 @@ namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
 
+/**
+ * @template T
+ */
 class Enum extends InputObject
 {
-    /** @var string[] */
+    /** @var T[] */
     private $validValues;
 
+    /**
+     * @param T[] $values
+     */
     public function __construct(array $values)
     {
         parent::__construct();

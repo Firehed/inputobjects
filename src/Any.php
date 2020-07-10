@@ -11,6 +11,9 @@ use Firehed\Input\Objects\InputObject;
  */
 class Any extends InputObject
 {
+    /**
+     * @param mixed $value
+     */
     public function validate($value): bool
     {
         return true;
