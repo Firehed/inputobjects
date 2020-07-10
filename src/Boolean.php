@@ -8,6 +8,9 @@ use InvalidArgumentException;
 
 class Boolean extends InputObject
 {
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         if (is_bool($value)) {

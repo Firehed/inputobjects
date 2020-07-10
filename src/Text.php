@@ -9,11 +9,16 @@ use InvalidArgumentException;
 
 class Text extends InputObject
 {
-
+    /** @var ?int */
     private $min = null;
+    /** @var ?int */
     private $max = null;
+    /** @var bool */
     private $trim = false;
 
+    /**
+     * @param int $min
+     */
     public function setMin($min): self
     {
         if (!is_int($min)) {
@@ -37,6 +42,9 @@ class Text extends InputObject
         return $this;
     } // setMin
 
+    /**
+     * @param int $max
+     */
     public function setMax($max): self
     {
         if (!is_int($max)) {
@@ -64,6 +72,9 @@ class Text extends InputObject
         return $this;
     }
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         if (!is_string($value)) {
