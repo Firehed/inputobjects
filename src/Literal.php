@@ -7,8 +7,12 @@ use Firehed\Input\Objects\InputObject;
 
 class Literal extends InputObject
 {
+    /** @var mixed */
     private $matchTarget;
 
+    /**
+     * @param mixed $value
+     */
     public function __construct($value)
     {
         parent::__construct();
@@ -18,6 +22,9 @@ class Literal extends InputObject
         $this->matchTarget = $value;
     }
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         return $this->matchTarget === $value;

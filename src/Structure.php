@@ -11,8 +11,12 @@ use Firehed\Input\Objects\InputObject;
 abstract class Structure extends InputObject implements
     ValidationInterface
 {
+    /** @var \Firehed\Input\Containers\SafeInput */
     private $validated;
 
+    /**
+     * @param mixed $value
+     */
     protected function validate($value): bool
     {
         if (!is_array($value)) {
