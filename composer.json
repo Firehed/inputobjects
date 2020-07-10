@@ -4,10 +4,13 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Firehed\\InputObjects\\": ["src/", "tests/"]
+            "Firehed\\InputObjects\\": "src/"
         }
     },
-     "authors": [
+    "autoload-dev": {
+        "Firehed\\InputObjects\\": "tests"
+    },
+    "authors": [
         {
             "name": "Eric Stern",
             "email": "eric@ericstern.com"
