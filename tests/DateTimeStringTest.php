@@ -28,7 +28,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         }, [
             '2018-05-09T22:55:30+00:00',
             '2018-05-09T22:55:30+0000',
-       ]);
+        ]);
         return $cases;
     }
 
@@ -47,7 +47,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
             ['5/9/18 10:55:30PM'],
             ['05/09/2018 10:55:30PM'],
             ['05/09/18 10:55:30PM'],
-             // Just garbage
+            // Just garbage
             ['not a date'],
             [true],
             [['a']],
@@ -94,6 +94,46 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
 
         $retInt = $dt->setValue(1525932105)->evaluate();
         $this->assertEquals($target, $retInt, 'Unixtime int did not evaluate correctly');
+    }
+
+    public function fractionalUnixtimeProvider()
+    {
+        return [
+            // Mutable, as string
+            ['1594344367.000001', true, new DateTime('2020-07-10T01:26:07.000001+00:00')],
+            ['1594344367.001', true, new DateTime('2020-07-10T01:26:07.001+00:00')],
+            ['1594344367.126', true, new DateTime('2020-07-10T01:26:07.126+00:00')],
+            ['1594344367.999', true, new DateTime('2020-07-10T01:26:07.999+00:00')],
+            ['1594344367.999999', true, new DateTime('2020-07-10T01:26:07.999999+00:00')],
+            // Mutable, as float
+            [1594344367.000001, true, new DateTime('2020-07-10T01:26:07.000001+00:00')],
+            [1594344367.001, true, new DateTime('2020-07-10T01:26:07.001+00:00')],
+            [1594344367.126, true, new DateTime('2020-07-10T01:26:07.126+00:00')],
+            [1594344367.999, true, new DateTime('2020-07-10T01:26:07.999+00:00')],
+            [1594344367.999999, true, new DateTime('2020-07-10T01:26:07.999999+00:00')],
+            // Simple test to make sure immutable version works. Same code
+            // path.
+            ['1594344367.126', false, new DateTimeImmutable('2020-07-10T01:26:07.126+00:00')],
+        ];
+    }
+
+    /**
+     * @param mixed $value The input value under test
+     * @param bool $returnMutable The value to pass to setReturnMutabke
+     *
+     * @covers ::evaluate
+     * @dataProvider fractionalUnixtimeProvider
+     */
+    public function testFractionalUnixtimeBug34($value, $returnMutable, DateTimeInterface $expected)
+    {
+        $dt = $this->getInputObject();
+        $dt->setAllowUnixtime(true);
+        $dt->setReturnMutable($returnMutable);
+
+        $ret = $dt->setValue($value)->evaluate();
+        $this->assertInstanceOf(DateTimeInterface::class, $ret);
+
+        $this->assertEquals($expected, $ret, 'Unixtime string with fraction did not evaluate correctly');
     }
 
     /** @covers ::__construct */
