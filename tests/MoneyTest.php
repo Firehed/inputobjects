@@ -24,6 +24,9 @@ class MoneyTest extends \PHPUnit\Framework\TestCase
         return new Money();
     }
 
+    /**
+     * @return array{array{amount: mixed, currency: string}, BaseMoney}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -35,6 +38,9 @@ class MoneyTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{amount: mixed, currency: mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [

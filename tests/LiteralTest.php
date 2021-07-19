@@ -19,6 +19,9 @@ class LiteralTest extends \PHPUnit\Framework\TestCase
         return new Literal('some string');
     }
 
+    /**
+     * @return array{string, string}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -26,6 +29,9 @@ class LiteralTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [
