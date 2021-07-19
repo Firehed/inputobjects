@@ -33,9 +33,6 @@ trait InputObjectTestTrait
      */
     abstract public function invalidEvaluations(): array;
 
-    /**
-     * @covers ::__construct
-     */
     public function testConstruct(): void
     {
         self::assertInstanceOf(
@@ -45,7 +42,6 @@ trait InputObjectTestTrait
     }
 
     /**
-     * @covers ::validate
      * @dataProvider evaluations
      * @param mixed $inputValue
      */
@@ -60,7 +56,6 @@ trait InputObjectTestTrait
     }
 
     /**
-     * @covers ::evaluate
      * @dataProvider evaluations
      * @param mixed $input_value
      * @param mixed $expected_output
@@ -84,8 +79,6 @@ trait InputObjectTestTrait
     }
 
     /**
-     * @covers ::evaluate
-     * @covers ::validate
      * @dataProvider invalidEvaluations
      * @param mixed $input_value
      */
