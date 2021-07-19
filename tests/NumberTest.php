@@ -57,7 +57,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             [null, null, false, false],
             [null, null, null, false],
         ];
-    } // validations
+    }
 
     /**
      * @return array{mixed, int|float}[]
@@ -73,7 +73,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             ['-123.4', -123.4],
             ['0555', 555], // We trim leading zeroes, not treat as octal
         ];
-    } // evaluations
+    }
 
     /**
      * @return array{string}[]
@@ -107,7 +107,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             [-255],
             [-256],
         ];
-    } // validRangeValues
+    }
 
     // Used by:
     // testValidMaxMinCombinations
@@ -122,7 +122,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             [100, 0],
             [\PHP_INT_MAX, 0],
         ];
-    } // validRangePairs
+    }
 
     /**
      * @covers ::setMax
@@ -136,7 +136,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             $this->number->setMax($value),
             'setMax should be chainable when called with a valid value'
         );
-    } // testValidMax
+    }
 
     /**
      * @covers ::setMin
@@ -150,8 +150,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             $this->number->setMin($value),
             'setMin should be chainable when called with a valid value'
         );
-    } // testValidMin
-
+    }
 
     /**
      * @covers ::setMax
@@ -162,7 +161,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->number->setMin(5)
             ->setMax(4);
-    } // testIncompatibleMaxAfterMin
+    }
 
     /**
      * @covers ::setMax
@@ -173,7 +172,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->number->setMax(4)
             ->setMin(5);
-    } // testIncompatibleMinAfterMax
+    }
 
     /**
      * @covers ::setMax
@@ -187,7 +186,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             $this->number->setMax($max)->setMin($min),
             'Specified max and min should have been compatible'
         );
-    } // testValidMaxMinCombinations
+    }
 
     /**
      * @covers ::setMax
@@ -210,7 +209,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             $this->number->isValid(),
             'Validation did not match expected output'
         );
-    } // testValidate
+    }
 
     /**
      * @covers ::evaluate
@@ -225,7 +224,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             $this->number->setValue($input_value)->evaluate(),
             'Evaluated value did not match the expected output'
         );
-    } // testEvaluate
+    }
 
     /**
      * @covers ::evaluate

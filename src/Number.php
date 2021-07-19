@@ -25,7 +25,7 @@ class Number extends InputObject
 
         $this->min = $min;
         return $this;
-    } // setMin
+    }
 
     public function setMax(float $max): self
     {
@@ -36,7 +36,7 @@ class Number extends InputObject
         }
         $this->max = $max;
         return $this;
-    } // setMax
+    }
 
     /**
      * @param mixed $value
@@ -70,10 +70,10 @@ class Number extends InputObject
             }
         }
         return true;
-    } // validate
+    }
 
     public function evaluate()
     {
         return $this->getValue() + 0;
-    } // evaluate
+    }
 }

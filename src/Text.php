@@ -32,7 +32,7 @@ class Text extends InputObject
 
         $this->min = $min;
         return $this;
-    } // setMin
+    }
 
     public function setMax(int $max): self
     {
@@ -48,7 +48,7 @@ class Text extends InputObject
         }
         $this->max = $max;
         return $this;
-    } // setMax
+    }
 
     public function setTrim(bool $shouldTrim): self
     {

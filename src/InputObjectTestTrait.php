@@ -57,7 +57,7 @@ trait InputObjectTestTrait
             $inputObject->isValid(),
             'Validation did not pass'
         );
-    } // testValidate
+    }
 
     /**
      * @covers ::evaluate
@@ -81,7 +81,7 @@ trait InputObjectTestTrait
                 'Evaluated value did not match the expected output'
             );
         }
-    } // testEvaluate
+    }
 
     /**
      * @covers ::evaluate

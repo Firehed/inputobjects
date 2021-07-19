@@ -52,7 +52,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         } else {
             self::assertFalse($list_of->isValid(), 'Value should be invalid');
         }
-    } // testValidate
+    }
 
     /**
      * @covers ::evaluate
@@ -67,7 +67,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         $out_map = [];
         foreach ($input as $i => $value) {
             $map[$i] = [$value, $mock_returns[$i]];
-            $out_map[$i] = new \StdClass;
+            $out_map[$i] = new \StdClass();
         }
 
         $io->expects(self::any())
@@ -89,7 +89,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             $this->expectException(UnexpectedValueException::class);
             $list_of->evaluate();
         }
-    } // testEvaluate
+    }
 
     /**
      * @dataProvider nonLists
@@ -104,7 +104,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         $list_of = new ListOf($io);
         $list_of->setValue($non_list);
         self::assertFalse($list_of->isValid());
-    } // testNonListsAreRejected
+    }
 
     /**
      * @covers ::setSeparator
@@ -186,7 +186,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             [['v1', 'v2'], [true, false], false],
             [['v1', 'v2'], [false, true], false],
         ];
-    } // values
+    }
 
     /**
      * @return array{mixed}[]
@@ -200,5 +200,5 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             [null],
             [['key' => 'value']], // dict, not list
         ];
-    } // nonLists
+    }
 }

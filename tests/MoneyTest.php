@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -16,7 +17,6 @@ use Money\Money as BaseMoney;
  */
 class MoneyTest extends \PHPUnit\Framework\TestCase
 {
-
     use InputObjectTestTrait;
 
     protected function getInputObject(): InputObject

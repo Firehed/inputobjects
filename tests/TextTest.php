@@ -15,7 +15,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     public function setUp(): void
     {
-        $this->text = new Text;
+        $this->text = new Text();
     }
 
     // Used by:
@@ -45,7 +45,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             [null, null, false, false],
             [null, null, null, false],
         ];
-    } // validations
+    }
 
     // Used by:
     // testValidMax
@@ -62,7 +62,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             [256],
             [\PHP_INT_MAX]
         ];
-    } // validRangeValues
+    }
 
     // Used by:
     // testValidMaxMinCombinations
@@ -77,7 +77,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             [100, 0],
             [\PHP_INT_MAX, 0],
         ];
-    } // validRangePairs
+    }
 
     /**
      * @covers ::setMax
@@ -91,7 +91,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->setMax($value),
             'setMax should be chainable when called with a valid value'
         );
-    } // testValidMax
+    }
 
     /**
      * @covers ::setMin
@@ -105,7 +105,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->setMin($value),
             'setMin should be chainable when called with a valid value'
         );
-    } // testValidMin
+    }
 
 
     /**
@@ -117,7 +117,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMin(5)
             ->setMax(4);
-    } // testIncompatibleMaxAfterMin
+    }
 
     /**
      * @covers ::setMax
@@ -128,7 +128,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(4)
             ->setMin(5);
-    } // testIncompatibleMinAfterMax
+    }
 
     /**
      * @covers ::setMax
@@ -142,7 +142,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->setMax($max)->setMin($min),
             'Specified max and min should have been compatible'
         );
-    } // testValidMaxMinCombinations
+    }
 
     /**
      * @covers ::setMax
@@ -151,7 +151,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(0);
-    } // testMaxOfZeroIsDisallowed
+    }
 
     /**
      * @covers ::setMin
@@ -163,7 +163,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->setMin(0),
             'SetMin should allow 0'
         );
-    } // testMinOfZeroIsAllowed
+    }
 
     /**
      * @covers ::setTrim
@@ -263,5 +263,5 @@ class TextTest extends \PHPUnit\Framework\TestCase
                 'Evaluate returned the wrong value'
             );
         }
-    } // testValidate
+    }
 }

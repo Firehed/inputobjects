@@ -29,7 +29,7 @@ class ListOf extends InputObject
     {
         parent::__construct();
         $this->type = $type;
-    } // __construct
+    }
 
     public function setSeparator(string $separator): self
     {
@@ -69,7 +69,7 @@ class ListOf extends InputObject
             }
         }
         return true;
-    } // validate
+    }
 
     public function evaluate()
     {
@@ -78,5 +78,5 @@ class ListOf extends InputObject
             $values[$key] = $this->type->setValue($value)->evaluate();
         }
         return $values;
-    } // evaluate
+    }
 }

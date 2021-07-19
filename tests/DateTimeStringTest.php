@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
-
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;

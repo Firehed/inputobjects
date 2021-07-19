@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -45,6 +46,9 @@ class AnyOf extends InputObject
             } catch (InputException $e) {
             }
         }
-        throw new LogicException('No valid value was found during evaluate despite validate passing. Please file a bug with a reproduce case!');
+        throw new LogicException(
+            'No valid value was found during evaluate despite validate ' .
+            'passing. Please file a bug with a reproduce case!'
+        );
     }
 }

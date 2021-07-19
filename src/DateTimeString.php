@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -23,7 +24,7 @@ use Firehed\Input\Objects\InputObject;
  */
 class DateTimeString extends InputObject
 {
-    const STANDARD_FORMATS = [
+    public const STANDARD_FORMATS = [
         DateTime::ATOM,
         DateTime::ISO8601,
     ];

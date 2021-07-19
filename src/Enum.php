@@ -30,5 +30,5 @@ class Enum extends InputObject
     final protected function validate($value): bool
     {
         return in_array($value, $this->validValues, true);
-    } // validate
+    }
 }
