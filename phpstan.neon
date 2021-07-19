@@ -3,10 +3,6 @@ includes:
     # vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
 parameters:
-    # Since this is input validation tooling, expected types won't always align with reality
-    # treatPhpDocTypesAsCertain: false
-    ignoreErrors:
-        - '#^Dynamic call to static method PHPUnit\\Framework\\Assert::assert#'
     level: max
     paths:
         - src
