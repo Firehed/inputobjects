@@ -15,7 +15,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      */
-    public function testExecuteValidData()
+    public function testExecuteValidData(): void
     {
         $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->atLeastOnce())
@@ -35,7 +35,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      */
-    public function testExecuteInvalidData()
+    public function testExecuteInvalidData(): void
     {
         $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->atLeastOnce())
@@ -52,7 +52,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      */
-    public function testExecuteWithVariousInputErrors()
+    public function testExecuteWithVariousInputErrors(): void
     {
         $required = [
             'int' => new Integer(),
@@ -76,7 +76,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testRecursiveStructureSuccessCase()
+    public function testRecursiveStructureSuccessCase(): void
     {
         $innerReq = [
             'amount' => new Integer(),
@@ -98,7 +98,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($input, $ret, 'Output of evaluate was wrong');
     }
 
-    public function testRecursiveStructureFailureCase()
+    public function testRecursiveStructureFailureCase(): void
     {
         $innerReq = [
             'amount' => new Integer(),
@@ -129,7 +129,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider nonArrays
      * */
-    public function testNonArrayInput($input)
+    public function testNonArrayInput($input): void
     {
         $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
         $structure->expects($this->any())
