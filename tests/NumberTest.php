@@ -12,32 +12,18 @@ use UnexpectedValueException;
  */
 class NumberTest extends \PHPUnit\Framework\TestCase
 {
+    private Number $number;
 
-    private $number;
     public function setUp(): void
     {
         $this->number = new Number();
-    } // setUp
-
-    // Used by:
-    // testInvalidMin
-    // testInvalidMax
-    public function invalidRangeValues()
-    {
-        return [
-            [null],
-            [false],
-            [true],
-            ["1.1"],
-            ["NAN"],
-            ["-2"],
-            ["three"],
-            [""],
-        ];
-    } // invalidRangeValues
+    }
 
     // Used by:
     // testValidate
+    /**
+     * @return array{?int, ?int, mixed, bool}[]
+     */
     public function validations(): array
     {
         return [
@@ -73,6 +59,9 @@ class NumberTest extends \PHPUnit\Framework\TestCase
         ];
     } // validations
 
+    /**
+     * @return array{mixed, int|float}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -86,6 +75,9 @@ class NumberTest extends \PHPUnit\Framework\TestCase
         ];
     } // evaluations
 
+    /**
+     * @return array{string}[]
+     */
     public function invalidEvaluations(): array
     {
         return [
@@ -99,6 +91,9 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     // Used by:
     // testValidMax
     // testValidMin
+    /**
+     * @return array{int}[]
+     */
     public function validRangeValues(): array
     {
         return [
@@ -116,6 +111,9 @@ class NumberTest extends \PHPUnit\Framework\TestCase
 
     // Used by:
     // testValidMaxMinCombinations
+    /**
+     * @return array{int, int}[]
+     */
     public function validRangePairs(): array
     {
         return [
@@ -128,20 +126,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers ::setMax
-     * @dataProvider invalidRangeValues
-     */
-    public function testInvalidMax($value): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->number->setMax($value);
-    } // testInvalidMax
-
-    /**
-     * @covers ::setMax
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMax($value): void
+    public function testValidMax(int $value): void
     {
         $this->assertSame(
             $this->number,
@@ -152,20 +140,10 @@ class NumberTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers ::setMin
-     * @dataProvider invalidRangeValues
-     */
-    public function testInvalidMin($value): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->number->setMin($value);
-    } // testInvalidMin
-
-    /**
-     * @covers ::setMin
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMin($value): void
+    public function testValidMin(int $value): void
     {
         $this->assertSame(
             $this->number,
@@ -202,7 +180,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMin
      * @dataProvider validRangePairs
      */
-    public function testValidMaxMinCombinations($max, $min): void
+    public function testValidMaxMinCombinations(int $max, int $min): void
     {
         $this->assertSame(
             $this->number,
@@ -216,8 +194,9 @@ class NumberTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMin
      * @covers ::validate
      * @dataProvider validations
+     * @param mixed $value
      */
-    public function testValidate($min, $max, $value, $isValid): void
+    public function testValidate(?int $min, ?int $max, $value, bool $isValid): void
     {
         if ($min !== null) {
             $this->number->setMin($min);
@@ -236,6 +215,8 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      * @dataProvider evaluations
+     * @param mixed $input_value
+     * @param int|float $expected_output
      */
     public function testEvaluate($input_value, $expected_output): void
     {
@@ -249,6 +230,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      * @dataProvider invalidEvaluations
+     * @param mixed $input_value
      */
     public function testInvalidEvaliations($input_value): void
     {
