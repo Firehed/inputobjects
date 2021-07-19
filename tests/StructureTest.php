@@ -2,6 +2,7 @@
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
 use Firehed\Input\Exceptions\InputException;
 
 /**
@@ -17,15 +18,15 @@ class StructureTest extends \PHPUnit\Framework\TestCase
      */
     public function testExecuteValidData(): void
     {
-        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
-        $structure->expects($this->atLeastOnce())
+        $structure = $this->getMockForAbstractClass(Structure::class);
+        $structure->expects(self::atLeastOnce())
             ->method('getRequiredInputs')
-            ->will($this->returnValue(['string' => new Text()]));
-        $structure->expects($this->atLeastOnce())
+            ->will(self::returnValue(['string' => new Text()]));
+        $structure->expects(self::atLeastOnce())
             ->method('getOptionalInputs')
-            ->will($this->returnValue([]));
+            ->will(self::returnValue([]));
         $ret = $structure->setValue(['string' => 'this is a string'])->evaluate();
-        $this->assertSame(
+        self::assertSame(
             ['string' => 'this is a string'],
             $ret,
             'Execute should have returned an array'
@@ -37,17 +38,17 @@ class StructureTest extends \PHPUnit\Framework\TestCase
      */
     public function testExecuteInvalidData(): void
     {
-        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
-        $structure->expects($this->atLeastOnce())
+        $structure = $this->getMockForAbstractClass(Structure::class);
+        $structure->expects(self::atLeastOnce())
             ->method('getRequiredInputs')
-            ->will($this->returnValue(['string' => new Text()]));
-        $structure->expects($this->atLeastOnce())
+            ->will(self::returnValue(['string' => new Text()]));
+        $structure->expects(self::atLeastOnce())
             ->method('getOptionalInputs')
-            ->will($this->returnValue([]));
+            ->will(self::returnValue([]));
         $this->expectException(InputException::class);
         $this->expectExceptionCode(InputException::INVALID_VALUES);
         $structure->setValue(['string' => 123])->evaluate();
-    } // testExecuteInvalidData
+    }
 
     /**
      * @covers ::evaluate
@@ -68,11 +69,11 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         $structure->setValue($input);
         try {
             $structure->evaluate();
-            $this->fail('An InputException should have been thrown');
+            self::fail('An InputException should have been thrown');
         } catch (InputException $e) {
-            $this->assertSame(['int'], $e->getInvalid());
-            $this->assertSame(['str'], $e->getMissing());
-            $this->assertSame(['new'], $e->getUnexpected());
+            self::assertSame(['int'], $e->getInvalid());
+            self::assertSame(['str'], $e->getMissing());
+            self::assertSame(['new'], $e->getUnexpected());
         }
     }
 
@@ -95,7 +96,7 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         ];
         $structure = $this->makeStructure($outerReq, []);
         $ret = $structure->setValue($input)->evaluate();
-        $this->assertSame($input, $ret, 'Output of evaluate was wrong');
+        self::assertSame($input, $ret, 'Output of evaluate was wrong');
     }
 
     public function testRecursiveStructureFailureCase(): void
@@ -117,36 +118,40 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         $structure = $this->makeStructure($outerReq, []);
         try {
             $ret = $structure->setValue($input)->evaluate();
-            $this->fail('An InputException should have been thrown');
+            self::fail('An InputException should have been thrown');
         } catch (InputException $e) {
-            $this->assertSame(['price.amount'], $e->getInvalid(), 'Invalid wrong');
-            $this->assertSame(['price.currency', 'name'], $e->getMissing(), 'Missing wrong');
-            $this->assertSame(['title'], $e->getUnexpected(), 'Unexpected wrong');
+            self::assertSame(['price.amount'], $e->getInvalid(), 'Invalid wrong');
+            self::assertSame(['price.currency', 'name'], $e->getMissing(), 'Missing wrong');
+            self::assertSame(['title'], $e->getUnexpected(), 'Unexpected wrong');
         }
     }
 
 
     /**
      * @dataProvider nonArrays
-     * */
+     * @param mixed $input
+     */
     public function testNonArrayInput($input): void
     {
-        $structure = $this->getMockForAbstractClass('Firehed\InputObjects\Structure');
-        $structure->expects($this->any())
+        $structure = $this->getMockForAbstractClass(Structure::class);
+        $structure->expects(self::any())
             ->method('getRequiredInputs')
-            ->will($this->returnValue([]));
-        $structure->expects($this->any())
+            ->will(self::returnValue([]));
+        $structure->expects(self::any())
             ->method('getOptionalInputs')
-            ->will($this->returnValue([]));
+            ->will(self::returnValue([]));
         $structure->setValue($input);
-        $this->assertFalse(
+        self::assertFalse(
             $structure->isValid(),
             'Input should not be valid'
         );
-    } // testNonArrayInput
+    }
 
     // -(  DataProviders  )-----------------------------------------------------
 
+    /**
+     * @return array{mixed}[]
+     */
     public function nonArrays()
     {
         return [
@@ -157,17 +162,21 @@ class StructureTest extends \PHPUnit\Framework\TestCase
             [1.2],
             ["[]"],
         ];
-    } // nonArrays
+    }
 
+    /**
+     * @param array<string, InputObject> $required
+     * @param array<string, InputObject> $optional
+     */
     private function makeStructure(array $required, array $optional): Structure
     {
         $structure = $this->getMockForAbstractClass(Structure::class);
-        $structure->expects($this->atLeastOnce())
+        $structure->expects(self::atLeastOnce())
             ->method('getRequiredInputs')
-            ->will($this->returnValue($required));
-        $structure->expects($this->atLeastOnce())
+            ->will(self::returnValue($required));
+        $structure->expects(self::atLeastOnce())
             ->method('getOptionalInputs')
-            ->will($this->returnValue($optional));
+            ->will(self::returnValue($optional));
         return $structure;
     }
 }
