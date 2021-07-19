@@ -54,6 +54,7 @@ class Number extends InputObject
         // blocks decimal points and negative signs, and there's no practical
         // way to do the check with casting alone.
         $value = (string)$value;
+        // @phpstan-ignore-next-line
         if (!preg_match('/^-?[0-9]*\.?[0-9]+$/', $value)) {
             return false;
         }
