@@ -21,6 +21,9 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
         return new Unixtime();
     }
 
+    /**
+     * @return array{mixed, DateTimeImmutable}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -39,6 +42,9 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [

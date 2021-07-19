@@ -19,6 +19,9 @@ class UuidTest extends \PHPUnit\Framework\TestCase
         return new Uuid();
     }
 
+    /**
+     * @return array{string, string}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -39,6 +42,9 @@ class UuidTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [
