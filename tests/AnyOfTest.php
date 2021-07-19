@@ -47,7 +47,7 @@ class AnyOfTest extends \PHPUnit\Framework\TestCase
         $enum = new Enum(['a', 'b', 'c']);
         $io = new AnyOf($enum, new ListOf($enum));
         $input = ['c', 'b'];
-        $this->assertTrue($io->setValue($input)->isValid());
-        $this->assertSame($input, $io->setValue($input)->evaluate());
+        self::assertTrue($io->setValue($input)->isValid());
+        self::assertSame($input, $io->setValue($input)->evaluate());
     }
 }

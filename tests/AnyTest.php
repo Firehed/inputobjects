@@ -38,8 +38,11 @@ class AnyTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
+    /**
+     * @return never
+     */
     public function invalidEvaluations(): array
     {
-        $this->markTestSkipped('It should be impossible to make this fail validation');
+        self::markTestSkipped('It should be impossible to make this fail validation');
     }
 }

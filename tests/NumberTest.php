@@ -131,7 +131,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidMax(int $value): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->number,
             $this->number->setMax($value),
             'setMax should be chainable when called with a valid value'
@@ -145,7 +145,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidMin(int $value): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->number,
             $this->number->setMin($value),
             'setMin should be chainable when called with a valid value'
@@ -182,7 +182,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidMaxMinCombinations(int $max, int $min): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->number,
             $this->number->setMax($max)->setMin($min),
             'Specified max and min should have been compatible'
@@ -205,7 +205,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             $this->number->setMax($max);
         }
         $this->number->setValue($value);
-        $this->assertSame(
+        self::assertSame(
             $isValid,
             $this->number->isValid(),
             'Validation did not match expected output'
@@ -220,7 +220,7 @@ class NumberTest extends \PHPUnit\Framework\TestCase
      */
     public function testEvaluate($input_value, $expected_output): void
     {
-        $this->assertSame(
+        self::assertSame(
             $expected_output,
             $this->number->setValue($input_value)->evaluate(),
             'Evaluated value did not match the expected output'

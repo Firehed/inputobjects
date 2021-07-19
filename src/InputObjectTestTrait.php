@@ -38,7 +38,7 @@ trait InputObjectTestTrait
      */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             InputObject::class,
             $this->getInputObject()
         );
@@ -53,7 +53,7 @@ trait InputObjectTestTrait
     {
         $inputObject = $this->getInputObject();
         $inputObject->setValue($inputValue);
-        $this->assertTrue(
+        self::assertTrue(
             $inputObject->isValid(),
             'Validation did not pass'
         );
@@ -69,13 +69,13 @@ trait InputObjectTestTrait
     {
         $inputObject = $this->getInputObject();
         if (is_object($expected_output)) {
-            $this->assertEquals(
+            self::assertEquals(
                 $expected_output,
                 $inputObject->setValue($input_value)->evaluate(),
                 'Evaluated value did not match the expected output'
             );
         } else {
-            $this->assertSame(
+            self::assertSame(
                 $expected_output,
                 $inputObject->setValue($input_value)->evaluate(),
                 'Evaluated value did not match the expected output'

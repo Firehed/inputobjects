@@ -58,7 +58,7 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
     public function testConstructWithNothing(): void
     {
         $ut = new Unixtime();
-        $this->assertNull($ut->getDefaultValue());
+        self::assertNull($ut->getDefaultValue());
     }
 
     /**
@@ -68,7 +68,7 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
     public function testConstructWithFalse(): void
     {
         $ut = new Unixtime(false);
-        $this->assertNull($ut->getDefaultValue());
+        self::assertNull($ut->getDefaultValue());
     }
 
     /**
@@ -79,19 +79,19 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
     {
         $ut = new Unixtime(true);
         $dt = $ut->getDefaultValue();
-        $this->assertInstanceOf(DateTimeImmutable::class, $dt);
+        self::assertInstanceOf(DateTimeImmutable::class, $dt);
         $diff = $dt->diff(new DateTimeImmutable());
         // On an absurdly slow system this test could fail, so this gives it
         // a little flexibility
         if (version_compare(PHP_VERSION, '7.1.0', '>=')) {
-            $this->assertTrue(($diff->s + $diff->f) < 1, 'Should have been < 1sec from now');
+            self::assertTrue(($diff->s + $diff->f) < 1, 'Should have been < 1sec from now');
         } else {
-            $this->assertTrue($diff->s < 2, 'Should have been one second or less difference');
+            self::assertTrue($diff->s < 2, 'Should have been one second or less difference');
         }
-        $this->assertSame(0, $diff->i, 'Minutes != 0');
-        $this->assertSame(0, $diff->h, 'Hours != 0');
-        $this->assertSame(0, $diff->d, 'Days != 0');
-        $this->assertSame(0, $diff->m, 'Months != 0');
-        $this->assertSame(0, $diff->y, 'Years != 0');
+        self::assertSame(0, $diff->i, 'Minutes != 0');
+        self::assertSame(0, $diff->h, 'Hours != 0');
+        self::assertSame(0, $diff->d, 'Days != 0');
+        self::assertSame(0, $diff->m, 'Months != 0');
+        self::assertSame(0, $diff->y, 'Years != 0');
     }
 }

@@ -86,7 +86,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidMax(int $value): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMax($value),
             'setMax should be chainable when called with a valid value'
@@ -100,7 +100,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidMin(int $value): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMin($value),
             'setMin should be chainable when called with a valid value'
@@ -137,7 +137,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidMaxMinCombinations(int $max, int $min): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMax($max)->setMin($min),
             'Specified max and min should have been compatible'
@@ -158,7 +158,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      */
     public function testMinOfZeroIsAllowed(): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMin(0),
             'SetMin should allow 0'
@@ -170,7 +170,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      */
     public function testSetTrimReturnsThis(): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setTrim(true),
             'setTrim should return $this'
@@ -184,7 +184,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     public function testTrimDefaultsToFalse(): void
     {
         $input = ' text with trailing space ';
-        $this->assertSame(
+        self::assertSame(
             $input,
             $this->text->setValue($input)->evaluate(),
             'Trailing space should not have been trimmed'
@@ -199,7 +199,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     {
         $input = ' text with trailing space ';
         $output = 'text with trailing space';
-        $this->assertSame(
+        self::assertSame(
             $output,
             $this->text->setTrim(true)->setValue($input)->evaluate(),
             'Trailing space should have been trimmed'
@@ -213,7 +213,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     public function testTrimAllowsExplicitFalse(): void
     {
         $input = ' text with trailing space ';
-        $this->assertSame(
+        self::assertSame(
             $input,
             $this->text->setTrim(false)->setValue($input)->evaluate(),
             'Trailing space should not have been trimmed'
@@ -226,7 +226,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     public function testTrimInteractionWithSetMin(): void
     {
         $input = ' ';
-        $this->assertFalse(
+        self::assertFalse(
             $this->text->setTrim(true)->setMin(1)->setValue($input)->isValid(),
             'Only space should not validate with trim enabled and a minimum'
         );
@@ -250,14 +250,14 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->setMax($max);
         }
         $this->text->setValue($value);
-        $this->assertSame(
+        self::assertSame(
             $isValid,
             $this->text->isValid(),
             'Validation did not match expected output'
         );
         if ($isValid) {
             // Valid values should just pass straight through
-            $this->assertSame(
+            self::assertSame(
                 $value,
                 $this->text->evaluate(),
                 'Evaluate returned the wrong value'

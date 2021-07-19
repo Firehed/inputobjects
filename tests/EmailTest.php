@@ -66,7 +66,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
     public function testValidate($email, $isValid): void
     {
         $this->email->setValue($email);
-        $this->assertSame(
+        self::assertSame(
             $isValid,
             $this->email->isValid(),
             'Validation did not match expected output'

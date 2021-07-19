@@ -18,7 +18,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     public function testConstruct()
     {
         $io = $this->getMockForAbstractClass(InputObject::class);
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ListOf::class,
             new ListOf($io),
             'Construct failed'
@@ -46,9 +46,9 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         $list_of->setValue($input);
 
         if ($is_valid) {
-            $this->assertTrue($list_of->isValid(), 'Value should be valid');
+            self::assertTrue($list_of->isValid(), 'Value should be valid');
         } else {
-            $this->assertFalse($list_of->isValid(), 'Value should be invalid');
+            self::assertFalse($list_of->isValid(), 'Value should be invalid');
         }
     } // testValidate
 
@@ -76,7 +76,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             $io->expects($this->atLeastOnce())
                 ->method('evaluate')
                 ->will(new OCC($out_map));
-            $this->assertSame(
+            self::assertSame(
                 $out_map,
                 $list_of->evaluate(),
                 'The evaluated list did not return the child evaluate() values'
@@ -98,7 +98,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             ->method('validate');
         $list_of = new ListOf($io);
         $list_of->setValue($non_list);
-        $this->assertFalse($list_of->isValid());
+        self::assertFalse($list_of->isValid());
     } // testNonListsAreRejected
 
     /**
@@ -108,7 +108,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     {
         $io = $this->createMock(InputObject::class);
         $listOf = new ListOf($io);
-        $this->assertSame($listOf, $listOf->setSeparator(','));
+        self::assertSame($listOf, $listOf->setSeparator(','));
     }
 
     /**
@@ -127,7 +127,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         $listOf->setSeparator($separator);
 
         $listOf->setValue($input);
-        $this->assertSame($output, $listOf->evaluate());
+        self::assertSame($output, $listOf->evaluate());
     }
 
     public function separatorValues(): array

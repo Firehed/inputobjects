@@ -64,16 +64,16 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
     public function testSetReturnMutable(): void
     {
         $dt = $this->getInputObject();
-        $this->assertSame(
+        self::assertSame(
             $dt,
             $dt->setReturnMutable(true),
             'setReturnMutable should return $this'
         );
 
         $ret = $dt->setValue('2018-05-09T22:55:30+0000')->evaluate();
-        $this->assertInstanceOf(DateTimeInterface::class, $ret);
-        $this->assertInstanceOf(DateTime::class, $ret);
-        $this->assertNotInstanceOf(DateTimeImmutable::class, $ret);
+        self::assertInstanceOf(DateTimeInterface::class, $ret);
+        self::assertInstanceOf(DateTime::class, $ret);
+        self::assertNotInstanceOf(DateTimeImmutable::class, $ret);
     }
 
     /**
@@ -84,7 +84,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
     public function testSetAllowUnixtime(): void
     {
         $dt = $this->getInputObject();
-        $this->assertSame(
+        self::assertSame(
             $dt,
             $dt->setAllowUnixtime(true),
             'setAllowUnixtime should return $this'
@@ -92,10 +92,10 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         $target = new DateTimeImmutable('@1525932105');
 
         $retStr = $dt->setValue('1525932105')->evaluate();
-        $this->assertEquals($target, $retStr, 'Unixtime string did not evaluate correctly');
+        self::assertEquals($target, $retStr, 'Unixtime string did not evaluate correctly');
 
         $retInt = $dt->setValue(1525932105)->evaluate();
-        $this->assertEquals($target, $retInt, 'Unixtime int did not evaluate correctly');
+        self::assertEquals($target, $retInt, 'Unixtime int did not evaluate correctly');
     }
 
     /** @covers ::__construct */
@@ -107,10 +107,10 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         $ret = $dt->setValue($input)->evaluate();
 
         $target = new DateTimeImmutable($input);
-        $this->assertEquals($target, $ret, 'Custom format did not evaluate');
+        self::assertEquals($target, $ret, 'Custom format did not evaluate');
 
         // This is a default-valid format
         $invalid = '2018-05-09T22:55:30+00:00';
-        $this->assertFalse($dt->setValue($invalid)->isValid());
+        self::assertFalse($dt->setValue($invalid)->isValid());
     }
 }

@@ -27,7 +27,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
     /** @covers ::__construct */
     public function testConstruct(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             InputObject::class,
             $this->nullable
         );
@@ -43,11 +43,11 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         $this->concrete
             ->expects($this->never())
             ->method('validate');
-        $this->assertTrue(
+        self::assertTrue(
             $this->nullable->isValid(),
             'Validation should have passed'
         );
-        $this->assertNull(
+        self::assertNull(
             $this->nullable->evaluate(),
             'Evaluate should have returned null'
         );
@@ -70,11 +70,11 @@ class NullableTest extends \PHPUnit\Framework\TestCase
             ->expects($this->atLeastOnce())
             ->method('evaluate')
             ->willReturn($value);
-        $this->assertTrue(
+        self::assertTrue(
             $this->nullable->isValid(),
             'Validation should have passed'
         );
-        $this->assertSame(
+        self::assertSame(
             $value,
             $this->nullable->evaluate(),
             'Evaluate should have returned the value'
@@ -90,7 +90,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
             ->method('validate')
             ->with($value)
             ->willReturn(false);
-        $this->assertFalse(
+        self::assertFalse(
             $this->nullable->isValid(),
             'Validation should not have passed'
         );
