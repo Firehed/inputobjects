@@ -9,13 +9,16 @@ namespace Firehed\InputObjects;
  */
 class EmailTest extends \PHPUnit\Framework\TestCase
 {
+    private Email $email;
 
-    private $email;
     public function setUp(): void
     {
         $this->email = new Email();
     }
 
+    /**
+     * @return array{string, bool}[]
+     */
     public function values()
     {
         // List from
@@ -63,7 +66,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @dataProvider values
      */
-    public function testValidate($email, $isValid): void
+    public function testValidate(string $email, bool $isValid): void
     {
         $this->email->setValue($email);
         self::assertSame(

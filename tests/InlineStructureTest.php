@@ -25,6 +25,12 @@ class InlineStructureTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
+    /**
+     * @return array{
+     *   array{r1: bool, r2: int, o1?: string, o2?: string},
+     *   array{r1: bool, r2: int, o1: ?string, o2: ?string},
+     * }[]
+     */
     public function evaluations(): array
     {
         return [
@@ -47,6 +53,9 @@ class InlineStructureTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     public function invalidEvaluations(): array
     {
         return [

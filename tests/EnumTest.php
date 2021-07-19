@@ -24,6 +24,9 @@ class EnumTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
+    /**
+     * @return array{mixed, mixed}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -35,6 +38,9 @@ class EnumTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [

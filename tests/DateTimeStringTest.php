@@ -23,17 +23,23 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         return new DateTimeString();
     }
 
+    /**
+     * @return array{string, DateTimeInterface}[]
+     */
     public function evaluations(): array
     {
-        $cases = array_map(function ($string) {
+        $cases = array_map(function ($string): array {
             return [$string, new DateTimeImmutable($string)];
         }, [
             '2018-05-09T22:55:30+00:00',
             '2018-05-09T22:55:30+0000',
-       ]);
+        ]);
         return $cases;
     }
 
+    /**
+     * @return array{mixed}
+     */
     public function invalidEvaluations(): array
     {
         return [
@@ -64,6 +70,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
     public function testSetReturnMutable(): void
     {
         $dt = $this->getInputObject();
+        assert($dt instanceof DateTimeString);
         self::assertSame(
             $dt,
             $dt->setReturnMutable(true),
@@ -84,6 +91,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
     public function testSetAllowUnixtime(): void
     {
         $dt = $this->getInputObject();
+        assert($dt instanceof DateTimeString);
         self::assertSame(
             $dt,
             $dt->setAllowUnixtime(true),
