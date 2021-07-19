@@ -19,9 +19,12 @@ class AnyTest extends \PHPUnit\Framework\TestCase
         return new Any();
     }
 
+    /**
+     * @return array{mixed, mixed}[]
+     */
     public function evaluations(): array
     {
-        return array_map(function ($any) {
+        return array_map(function ($any): array {
             return [$any, $any];
         }, [
             null,
