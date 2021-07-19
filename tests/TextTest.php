@@ -11,30 +11,18 @@ use InvalidArgumentException;
  */
 class TextTest extends \PHPUnit\Framework\TestCase
 {
-
-    private $text;
+    private Text $text;
 
     public function setUp(): void
     {
         $this->text = new Text;
-    } // setUp
-
-    // Used by:
-    // testInvalidMin
-    // testInvalidMax
-    public function invalidRangeValues(): array
-    {
-        return [
-            [null],
-            [false],
-            [true],
-            [1.1],
-            [-2],
-        ];
-    } // invalidRangeValues
+    }
 
     // Used by:
     // testValidate
+    /**
+     * @return array{?int, ?int, mixed, bool}[]
+     */
     public function validations(): array
     {
         return [
@@ -62,6 +50,9 @@ class TextTest extends \PHPUnit\Framework\TestCase
     // Used by:
     // testValidMax
     // testValidMin
+    /**
+     * @return array{int}[]
+     */
     public function validRangeValues(): array
     {
         return [
@@ -75,6 +66,9 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     // Used by:
     // testValidMaxMinCombinations
+    /**
+     * @return array{int, int}[]
+     */
     public function validRangePairs(): array
     {
         return [
@@ -87,20 +81,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers ::setMax
-     * @dataProvider invalidRangeValues
-     */
-    public function testInvalidMax($value): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->text->setMax($value);
-    } // testInvalidMax
-
-    /**
-     * @covers ::setMax
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMax($value): void
+    public function testValidMax(int $value): void
     {
         $this->assertSame(
             $this->text,
@@ -111,20 +95,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers ::setMin
-     * @dataProvider invalidRangeValues
-     */
-    public function testInvalidMin($value): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->text->setMin($value);
-    } // testInvalidMin
-
-    /**
-     * @covers ::setMin
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMin($value): void
+    public function testValidMin(int $value): void
     {
         $this->assertSame(
             $this->text,
@@ -161,7 +135,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMin
      * @dataProvider validRangePairs
      */
-    public function testValidMaxMinCombinations($max, $min): void
+    public function testValidMaxMinCombinations(int $max, int $min): void
     {
         $this->assertSame(
             $this->text,
@@ -265,8 +239,9 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::validate
      * @dataProvider validations
+     * @param mixed $value
      */
-    public function testValidate($min, $max, $value, $isValid): void
+    public function testValidate(?int $min, ?int $max, $value, bool $isValid): void
     {
         if ($min !== null) {
             $this->text->setMin($min);
