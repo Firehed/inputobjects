@@ -12,11 +12,10 @@ use Firehed\Input\Objects\InputObject;
  */
 class NullableTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var InputObject */
-    private $concrete;
+    /** @var InputObject & \PHPUnit\Framework\MockObject\MockObject */
+    private InputObject $concrete;
 
-    /** @var Nullable */
-    private $nullable;
+    private Nullable $nullable;
 
     public function setUp(): void
     {
@@ -41,7 +40,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
     {
         $this->nullable->setValue(null);
         $this->concrete
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('validate');
         self::assertTrue(
             $this->nullable->isValid(),
@@ -62,12 +61,12 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         $value = random_int(0, PHP_INT_MAX);
         $this->nullable->setValue($value);
         $this->concrete
-            ->expects($this->atLeastOnce())
+            ->expects(self::atLeastOnce())
             ->method('validate')
             ->with($value)
             ->willReturn(true);
          $this->concrete
-            ->expects($this->atLeastOnce())
+            ->expects(self::atLeastOnce())
             ->method('evaluate')
             ->willReturn($value);
         self::assertTrue(
@@ -86,7 +85,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         $value = random_int(0, PHP_INT_MAX);
         $this->nullable->setValue($value);
         $this->concrete
-            ->expects($this->atLeastOnce())
+            ->expects(self::atLeastOnce())
             ->method('validate')
             ->with($value)
             ->willReturn(false);
@@ -94,6 +93,5 @@ class NullableTest extends \PHPUnit\Framework\TestCase
             $this->nullable->isValid(),
             'Validation should not have passed'
         );
-     }
-
+    }
 }
