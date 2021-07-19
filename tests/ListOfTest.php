@@ -15,7 +15,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::__construct
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $io = $this->getMockForAbstractClass(InputObject::class);
         self::assertInstanceOf(
@@ -23,13 +23,15 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             new ListOf($io),
             'Construct failed'
         );
-    } // testConstruct
+    }
 
     /**
      * @covers ::validate
      * @dataProvider values
+     * @param string[] $input
+     * @param bool[] $mock_returns
      */
-    public function testValidate($input, $mock_returns, $is_valid)
+    public function testValidate(array $input, array $mock_returns, bool $is_valid): void
     {
         // Generally, assert that each of the input values is validated against
         // the input type provided in the constructor
@@ -37,7 +39,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             InputObject::class,
             ['validate']
         );
-        $io->expects($this->atLeastOnce())
+        $io->expects(self::atLeastOnce())
             ->method('validate')
             // ->will($this->onConsectiveCalls(...$mock_returns));
             ->will(new OCC($mock_returns));
@@ -55,8 +57,10 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::evaluate
      * @dataProvider values
+     * @param string[] $input
+     * @param bool[] $mock_returns
      */
-    public function testEvaluate($input, $mock_returns, $is_valid)
+    public function testEvaluate(array $input, array $mock_returns, bool $is_valid): void
     {
         $io = $this->createMock(InputObject::class);
         $map = [];
@@ -66,14 +70,14 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
             $out_map[$i] = new \StdClass;
         }
 
-        $io->expects($this->any())
+        $io->expects(self::any())
             ->method('validate')
-            ->will($this->returnValueMap($map));
+            ->will(self::returnValueMap($map));
 
         $list_of = new ListOf($io);
         $list_of->setValue($input);
         if ($is_valid) {
-            $io->expects($this->atLeastOnce())
+            $io->expects(self::atLeastOnce())
                 ->method('evaluate')
                 ->will(new OCC($out_map));
             self::assertSame(
@@ -90,11 +94,12 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider nonLists
      * @covers ::validate
+     * @param mixed $non_list
      */
-    public function testNonListsAreRejected($non_list)
+    public function testNonListsAreRejected($non_list): void
     {
         $io = $this->getMockForAbstractClass(InputObject::class);
-        $io->expects($this->never())
+        $io->expects(self::never())
             ->method('validate');
         $list_of = new ListOf($io);
         $list_of->setValue($non_list);
@@ -104,7 +109,7 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setSeparator
      */
-    public function testSetSeapratorReturnsThis()
+    public function testSetSeapratorReturnsThis(): void
     {
         $io = $this->createMock(InputObject::class);
         $listOf = new ListOf($io);
@@ -116,13 +121,14 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @covers ::evaluate
      * @dataProvider separatorValues
+     * @param mixed[] $output
      */
     public function testStringValuesAreAcceptedWithSeparator(
         InputObject $io,
         string $separator,
         string $input,
         array $output
-    ) {
+    ): void {
         $listOf = new ListOf($io);
         $listOf->setSeparator($separator);
 
@@ -130,6 +136,9 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         self::assertSame($output, $listOf->evaluate());
     }
 
+    /**
+     * @return array{InputObject, string, string, mixed[]}[]
+     */
     public function separatorValues(): array
     {
         $text = new Text();
@@ -163,6 +172,9 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{string[], bool[], bool}[]
+     */
     public function values()
     {
         return [
@@ -176,6 +188,9 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         ];
     } // values
 
+    /**
+     * @return array{mixed}[]
+     */
     public function nonLists()
     {
         return [
