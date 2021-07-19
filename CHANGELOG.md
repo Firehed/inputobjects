@@ -25,6 +25,7 @@ Library updated for modern PHP versions & community coding standards
   changes during unit tests.
 - [**Breaking**, minor] `ListOf::setSeparator()` will now reject an empty string
   as a separator.
+- MoneyPHP\Money 4.0 is now supported. 3.x will also continue to work.
 
 
 ## [3.2.2] - 2019-02-04
