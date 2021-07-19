@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -19,6 +20,9 @@ class IntegerTest extends \PHPUnit\Framework\TestCase
         return new Integer();
     }
 
+    /**
+     * @return array{mixed, int}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -34,6 +38,9 @@ class IntegerTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [
@@ -55,6 +62,9 @@ class IntegerTest extends \PHPUnit\Framework\TestCase
 
     // Used by:
     // testValidateWithRanges
+    /**
+     * @return array{?int, ?int, mixed, bool}[]
+     */
     public function validations()
     {
         return [
@@ -86,15 +96,16 @@ class IntegerTest extends \PHPUnit\Framework\TestCase
             [null, null, false, false],
             [null, null, null, false],
         ];
-    } // validations
+    }
 
     /**
      * @covers ::setMax
      * @covers ::setMin
      * @covers ::validate
      * @dataProvider validations
+     * @param mixed $value
      */
-    public function testValidateWithRanges($min, $max, $value, $isValid)
+    public function testValidateWithRanges(?int $min, ?int $max, $value, bool $isValid): void
     {
         /** @var \Firehed\InputObjects\Integer */
         $int = $this->getInputObject();
@@ -105,10 +116,10 @@ class IntegerTest extends \PHPUnit\Framework\TestCase
             $int->setMax($max);
         }
         $int->setValue($value);
-        $this->assertSame(
+        self::assertSame(
             $isValid,
             $int->isValid(),
             'Validation did not match expected output'
         );
-    } // testValidate
+    }
 }

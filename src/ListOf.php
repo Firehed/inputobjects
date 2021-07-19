@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Firehed\InputObjects;
 
 use Firehed\Input\Objects\InputObject;
+use InvalidArgumentException;
 
 /**
  * The ListOf InputObject is used in situations where we expect to receive
@@ -17,20 +18,24 @@ use Firehed\Input\Objects\InputObject;
  */
 class ListOf extends InputObject
 {
-    /** @var string */
-    private $separator;
+    /**
+     * @var ?non-empty-string
+     */
+    private ?string $separator = null;
 
-    /** @var InputObject */
-    private $type;
+    private InputObject $type;
 
     public function __construct(InputObject $type)
     {
         parent::__construct();
         $this->type = $type;
-    } // __construct
+    }
 
     public function setSeparator(string $separator): self
     {
+        if (strlen($separator) === 0) {
+            throw new InvalidArgumentException('Separator must not be empty');
+        }
         $this->separator = $separator;
         return $this;
     }
@@ -64,7 +69,7 @@ class ListOf extends InputObject
             }
         }
         return true;
-    } // validate
+    }
 
     public function evaluate()
     {
@@ -73,5 +78,5 @@ class ListOf extends InputObject
             $values[$key] = $this->type->setValue($value)->evaluate();
         }
         return $values;
-    } // evaluate
+    }
 }

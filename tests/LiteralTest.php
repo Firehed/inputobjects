@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
+
+use Firehed\Input\Objects\InputObject;
 
 /**
  * @coversDefaultClass Firehed\InputObjects\Literal
@@ -12,19 +15,25 @@ class LiteralTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    protected function getInputObject()
+    protected function getInputObject(): InputObject
     {
         return new Literal('some string');
     }
 
-    public function evaluations()
+    /**
+     * @return array{string, string}[]
+     */
+    public function evaluations(): array
     {
         return [
             ['some string', 'some string'],
         ];
     }
 
-    public function invalidEvaluations()
+    /**
+     * @return array{mixed}[]
+     */
+    public function invalidEvaluations(): array
     {
         return [
             ['some string '],

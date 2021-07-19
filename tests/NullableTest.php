@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -12,22 +13,21 @@ use Firehed\Input\Objects\InputObject;
  */
 class NullableTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var InputObject */
-    private $concrete;
+    /** @var InputObject & \PHPUnit\Framework\MockObject\MockObject */
+    private InputObject $concrete;
 
-    /** @var Nullable */
-    private $nullable;
+    private Nullable $nullable;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->concrete = $this->createMock(InputObject::class);
         $this->nullable = new Nullable($this->concrete);
     }
 
     /** @covers ::__construct */
-    public function testConstruct()
+    public function testConstruct(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             InputObject::class,
             $this->nullable
         );
@@ -37,17 +37,17 @@ class NullableTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @covers ::evaluate
      */
-    public function testValidateWithNull()
+    public function testValidateWithNull(): void
     {
         $this->nullable->setValue(null);
         $this->concrete
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('validate');
-        $this->assertTrue(
+        self::assertTrue(
             $this->nullable->isValid(),
             'Validation should have passed'
         );
-        $this->assertNull(
+        self::assertNull(
             $this->nullable->evaluate(),
             'Evaluate should have returned null'
         );
@@ -57,43 +57,42 @@ class NullableTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @covers ::evaluate
      */
-    public function testEvaluateWithValue()
+    public function testEvaluateWithValue(): void
     {
         $value = random_int(0, PHP_INT_MAX);
         $this->nullable->setValue($value);
         $this->concrete
-            ->expects($this->atLeastOnce())
+            ->expects(self::atLeastOnce())
             ->method('validate')
             ->with($value)
             ->willReturn(true);
          $this->concrete
-            ->expects($this->atLeastOnce())
+            ->expects(self::atLeastOnce())
             ->method('evaluate')
             ->willReturn($value);
-        $this->assertTrue(
+        self::assertTrue(
             $this->nullable->isValid(),
             'Validation should have passed'
         );
-        $this->assertSame(
+        self::assertSame(
             $value,
             $this->nullable->evaluate(),
             'Evaluate should have returned the value'
         );
     }
 
-    public function testInvalidEvaluation()
+    public function testInvalidEvaluation(): void
     {
         $value = random_int(0, PHP_INT_MAX);
         $this->nullable->setValue($value);
         $this->concrete
-            ->expects($this->atLeastOnce())
+            ->expects(self::atLeastOnce())
             ->method('validate')
             ->with($value)
             ->willReturn(false);
-        $this->assertFalse(
+        self::assertFalse(
             $this->nullable->isValid(),
             'Validation should not have passed'
         );
-     }
-
+    }
 }

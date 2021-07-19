@@ -19,17 +19,18 @@ class Uuid extends InputObject
         }
         $regex = '#^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$#i
 ';
+        // @phpstan-ignore-next-line
         if (!preg_match($regex, $value)) {
             return false;
         }
-        $version = $value[14];
+        $version = (int)$value[14];
 
-        if ($version === '0') {
+        if ($version === 0) {
             return $value === '00000000-0000-0000-0000-000000000000';
         }
         // Future: examine the variant (ord($value[19]) & 0xF0) and
         // do...something
-        return in_array($version, self::$versions);
+        return in_array($version, self::$versions, true);
     }
 
     public function evaluate()

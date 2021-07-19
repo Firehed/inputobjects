@@ -11,31 +11,19 @@ use InvalidArgumentException;
  */
 class TextTest extends \PHPUnit\Framework\TestCase
 {
+    private Text $text;
 
-    private $text;
-
-    public function setUp()
+    public function setUp(): void
     {
-        $this->text = new Text;
-    } // setUp
-
-    // Used by:
-    // testInvalidMin
-    // testInvalidMax
-    public function invalidRangeValues()
-    {
-        return [
-            [null],
-            [false],
-            [true],
-            [1.1],
-            [-2],
-        ];
-    } // invalidRangeValues
+        $this->text = new Text();
+    }
 
     // Used by:
     // testValidate
-    public function validations()
+    /**
+     * @return array{?int, ?int, mixed, bool}[]
+     */
+    public function validations(): array
     {
         return [
             [null, null, '', true],
@@ -57,12 +45,15 @@ class TextTest extends \PHPUnit\Framework\TestCase
             [null, null, false, false],
             [null, null, null, false],
         ];
-    } // validations
+    }
 
     // Used by:
     // testValidMax
     // testValidMin
-    public function validRangeValues()
+    /**
+     * @return array{int}[]
+     */
+    public function validRangeValues(): array
     {
         return [
             [1],
@@ -71,11 +62,14 @@ class TextTest extends \PHPUnit\Framework\TestCase
             [256],
             [\PHP_INT_MAX]
         ];
-    } // validRangeValues
+    }
 
     // Used by:
     // testValidMaxMinCombinations
-    public function validRangePairs()
+    /**
+     * @return array{int, int}[]
+     */
+    public function validRangePairs(): array
     {
         return [
             [10, 5],
@@ -83,120 +77,100 @@ class TextTest extends \PHPUnit\Framework\TestCase
             [100, 0],
             [\PHP_INT_MAX, 0],
         ];
-    } // validRangePairs
-
-    /**
-     * @covers ::setMax
-     * @dataProvider invalidRangeValues
-     */
-    public function testInvalidMax($value)
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->text->setMax($value);
-    } // testInvalidMax
+    }
 
     /**
      * @covers ::setMax
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMax($value)
+    public function testValidMax(int $value): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMax($value),
             'setMax should be chainable when called with a valid value'
         );
-    } // testValidMax
-
-    /**
-     * @covers ::setMin
-     * @dataProvider invalidRangeValues
-     */
-    public function testInvalidMin($value)
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->text->setMin($value);
-    } // testInvalidMin
+    }
 
     /**
      * @covers ::setMin
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMin($value)
+    public function testValidMin(int $value): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMin($value),
             'setMin should be chainable when called with a valid value'
         );
-    } // testValidMin
+    }
 
 
     /**
      * @covers ::setMax
      * @covers ::setMin
      */
-    public function testIncompatibleMaxAfterMin()
+    public function testIncompatibleMaxAfterMin(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMin(5)
             ->setMax(4);
-    } // testIncompatibleMaxAfterMin
+    }
 
     /**
      * @covers ::setMax
      * @covers ::setMin
      */
-    public function testIncompatibleMinAfterMax()
+    public function testIncompatibleMinAfterMax(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(4)
             ->setMin(5);
-    } // testIncompatibleMinAfterMax
+    }
 
     /**
      * @covers ::setMax
      * @covers ::setMin
      * @dataProvider validRangePairs
      */
-    public function testValidMaxMinCombinations($max, $min)
+    public function testValidMaxMinCombinations(int $max, int $min): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMax($max)->setMin($min),
             'Specified max and min should have been compatible'
         );
-    } // testValidMaxMinCombinations
+    }
 
     /**
      * @covers ::setMax
      */
-    public function testMaxOfZeroIsDisallowed()
+    public function testMaxOfZeroIsDisallowed(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(0);
-    } // testMaxOfZeroIsDisallowed
+    }
 
     /**
      * @covers ::setMin
      */
-    public function testMinOfZeroIsAllowed()
+    public function testMinOfZeroIsAllowed(): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setMin(0),
             'SetMin should allow 0'
         );
-    } // testMinOfZeroIsAllowed
+    }
 
     /**
      * @covers ::setTrim
      */
-    public function testSetTrimReturnsThis()
+    public function testSetTrimReturnsThis(): void
     {
-        $this->assertSame(
+        self::assertSame(
             $this->text,
             $this->text->setTrim(true),
             'setTrim should return $this'
@@ -207,10 +181,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::setTrim
      */
-    public function testTrimDefaultsToFalse()
+    public function testTrimDefaultsToFalse(): void
     {
         $input = ' text with trailing space ';
-        $this->assertSame(
+        self::assertSame(
             $input,
             $this->text->setValue($input)->evaluate(),
             'Trailing space should not have been trimmed'
@@ -221,11 +195,11 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::setTrim
      */
-    public function testTrimWorksWhenEnabled()
+    public function testTrimWorksWhenEnabled(): void
     {
         $input = ' text with trailing space ';
         $output = 'text with trailing space';
-        $this->assertSame(
+        self::assertSame(
             $output,
             $this->text->setTrim(true)->setValue($input)->evaluate(),
             'Trailing space should have been trimmed'
@@ -236,10 +210,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::setTrim
      */
-    public function testTrimAllowsExplicitFalse()
+    public function testTrimAllowsExplicitFalse(): void
     {
         $input = ' text with trailing space ';
-        $this->assertSame(
+        self::assertSame(
             $input,
             $this->text->setTrim(false)->setValue($input)->evaluate(),
             'Trailing space should not have been trimmed'
@@ -249,10 +223,10 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::validate
      */
-    public function testTrimInteractionWithSetMin()
+    public function testTrimInteractionWithSetMin(): void
     {
         $input = ' ';
-        $this->assertFalse(
+        self::assertFalse(
             $this->text->setTrim(true)->setMin(1)->setValue($input)->isValid(),
             'Only space should not validate with trim enabled and a minimum'
         );
@@ -265,8 +239,9 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::validate
      * @dataProvider validations
+     * @param mixed $value
      */
-    public function testValidate($min, $max, $value, $isValid)
+    public function testValidate(?int $min, ?int $max, $value, bool $isValid): void
     {
         if ($min !== null) {
             $this->text->setMin($min);
@@ -275,18 +250,18 @@ class TextTest extends \PHPUnit\Framework\TestCase
             $this->text->setMax($max);
         }
         $this->text->setValue($value);
-        $this->assertSame(
+        self::assertSame(
             $isValid,
             $this->text->isValid(),
             'Validation did not match expected output'
         );
         if ($isValid) {
             // Valid values should just pass straight through
-            $this->assertSame(
+            self::assertSame(
                 $value,
                 $this->text->evaluate(),
                 'Evaluate returned the wrong value'
             );
         }
-    } // testValidate
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -23,7 +24,7 @@ use Firehed\Input\Objects\InputObject;
  */
 class DateTimeString extends InputObject
 {
-    const STANDARD_FORMATS = [
+    public const STANDARD_FORMATS = [
         DateTime::ATOM,
         DateTime::ISO8601,
     ];
@@ -40,12 +41,9 @@ class DateTimeString extends InputObject
     /**
      * @param string[] $validFormats
      */
-    public function __construct(array $validFormats = [])
+    public function __construct(array $validFormats = self::STANDARD_FORMATS)
     {
         parent::__construct();
-        if (!$validFormats) {
-            $validFormats = self::STANDARD_FORMATS;
-        }
         $this->validFormats = $validFormats;
     }
 
@@ -77,7 +75,7 @@ class DateTimeString extends InputObject
         }
 
         foreach ($this->validFormats as $format) {
-            if (DateTime::createFromFormat($format, $value)) {
+            if (DateTime::createFromFormat($format, $value) !== false) {
                 return true;
             }
         }

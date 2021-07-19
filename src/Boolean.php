@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -18,7 +19,8 @@ class Boolean extends InputObject
         }
 
         if (is_string($value)) {
-            if ($value === '1'
+            if (
+                $value === '1'
                 || $value === '0'
                 || $value === 'true'
                 || $value === 'false'

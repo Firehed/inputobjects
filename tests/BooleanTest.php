@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -19,6 +20,9 @@ class BooleanTest extends \PHPUnit\Framework\TestCase
         return new Boolean();
     }
 
+    /**
+     * @return array{mixed, bool}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -37,6 +41,9 @@ class BooleanTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}
+     */
     public function invalidEvaluations(): array
     {
         return [

@@ -27,12 +27,12 @@ abstract class Structure extends InputObject implements
         // If validation fails, an exception will be thrown that matches the
         // same format expected elsewhere, so there's no need to handle it here
         return true;
-    } // validate
+    }
 
     public function evaluate()
     {
         // Performs validation
         parent::evaluate();
         return $this->validated->asArray();
-    } // evaluate
+    }
 }

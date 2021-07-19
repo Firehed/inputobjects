@@ -5,12 +5,13 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 use UnexpectedValueException;
 
+/**
+ * Trait that can be used in any PHPUnit TestCase
+ */
 trait InputObjectTestTrait
 {
     /**
      * Provide the input object to test
-     *
-     * @return \Firehed\Input\Objects\InputObject
      */
     abstract protected function getInputObject(): InputObject;
 
@@ -19,7 +20,7 @@ trait InputObjectTestTrait
      *
      * Should return an array of [input, expected_output]
      *
-     * @return array
+     * @return array{mixed, mixed}
      */
     abstract public function evaluations(): array;
 
@@ -28,60 +29,60 @@ trait InputObjectTestTrait
      *
      * Should return an arrat of [invalid_input]
      *
-     * @return array
+     * @return array{mixed}
      */
     abstract public function invalidEvaluations(): array;
 
-    /**
-     * @covers ::__construct
-     */
-    public function testConstruct()
+    public function testConstruct(): void
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             InputObject::class,
             $this->getInputObject()
         );
     }
 
     /**
-     * @covers ::validate
      * @dataProvider evaluations
+     * @param mixed $inputValue
      */
-    public function testValidate($inputValue)
+    public function testValidate($inputValue): void
     {
         $inputObject = $this->getInputObject();
         $inputObject->setValue($inputValue);
-        $this->assertTrue(
+        self::assertTrue(
             $inputObject->isValid(),
             'Validation did not pass'
         );
-    } // testValidate
+    }
 
     /**
-     * @covers ::evaluate
      * @dataProvider evaluations
+     * @param mixed $input_value
+     * @param mixed $expected_output
      */
-    public function testEvaluate($input_value, $expected_output)
+    public function testEvaluate($input_value, $expected_output): void
     {
         $inputObject = $this->getInputObject();
         if (is_object($expected_output)) {
-            $assert = [$this, 'assertEquals'];
+            self::assertEquals(
+                $expected_output,
+                $inputObject->setValue($input_value)->evaluate(),
+                'Evaluated value did not match the expected output'
+            );
         } else {
-            $assert = [$this, 'assertSame'];
+            self::assertSame(
+                $expected_output,
+                $inputObject->setValue($input_value)->evaluate(),
+                'Evaluated value did not match the expected output'
+            );
         }
-        $assert(
-            $expected_output,
-            $inputObject->setValue($input_value)->evaluate(),
-            'Evaluated value did not match the expected output'
-        );
-    } // testEvaluate
+    }
 
     /**
-     * @covers ::evaluate
-     * @covers ::validate
      * @dataProvider invalidEvaluations
+     * @param mixed $input_value
      */
-    public function testInvalidEvaluations($input_value)
+    public function testInvalidEvaluations($input_value): void
     {
         $inputObject = $this->getInputObject();
         $this->expectException(UnexpectedValueException::class);
