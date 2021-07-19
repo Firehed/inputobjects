@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [4.0.0] - Unreleased
+- Requires >= PHP 7.3
+- Tests are no longer exported
+- CI moved to Github Actions; updated to supported PHP versions
+- `InputObjectTestTrait` no longer provides `::covers` annotations, as that is semi-deprecated in newer PHPUnit versions
+- Lots of type cleanup (none should act as a breaking change unless the library was already being used incorrectly)
+
+
 ## [3.2.2] - 2019-02-04
 ### Summary
 - Changes some tests to improve compatibility with PHPUnit 8
