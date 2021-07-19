@@ -55,7 +55,7 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
      * @covers ::__construct
      * @covers ::getDefaultValue
      */
-    public function testConstructWithNothing()
+    public function testConstructWithNothing(): void
     {
         $ut = new Unixtime();
         $this->assertNull($ut->getDefaultValue());
@@ -65,7 +65,7 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
      * @covers ::__construct
      * @covers ::getDefaultValue
      */
-    public function testConstructWithFalse()
+    public function testConstructWithFalse(): void
     {
         $ut = new Unixtime(false);
         $this->assertNull($ut->getDefaultValue());
@@ -75,7 +75,7 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
      * @covers ::__construct
      * @covers ::getDefaultValue
      */
-    public function testConstructWithTrue()
+    public function testConstructWithTrue(): void
     {
         $ut = new Unixtime(true);
         $dt = $ut->getDefaultValue();

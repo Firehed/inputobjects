@@ -35,7 +35,7 @@ trait InputObjectTestTrait
     /**
      * @covers ::__construct
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             InputObject::class,
@@ -46,8 +46,9 @@ trait InputObjectTestTrait
     /**
      * @covers ::validate
      * @dataProvider evaluations
+     * @param mixed $inputValue
      */
-    public function testValidate($inputValue)
+    public function testValidate($inputValue): void
     {
         $inputObject = $this->getInputObject();
         $inputObject->setValue($inputValue);
@@ -60,8 +61,10 @@ trait InputObjectTestTrait
     /**
      * @covers ::evaluate
      * @dataProvider evaluations
+     * @param mixed $input_value
+     * @param mixed $expected_output
      */
-    public function testEvaluate($input_value, $expected_output)
+    public function testEvaluate($input_value, $expected_output): void
     {
         $inputObject = $this->getInputObject();
         if (is_object($expected_output)) {
@@ -80,8 +83,9 @@ trait InputObjectTestTrait
      * @covers ::evaluate
      * @covers ::validate
      * @dataProvider invalidEvaluations
+     * @param mixed $input_value
      */
-    public function testInvalidEvaluations($input_value)
+    public function testInvalidEvaluations($input_value): void
     {
         $inputObject = $this->getInputObject();
         $this->expectException(UnexpectedValueException::class);
