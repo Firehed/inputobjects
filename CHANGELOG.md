@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.0.0] - Unreleased
-- Requires >= PHP 7.3
+- Requires >= PHP 7.4
 - Tests are no longer exported
 - CI moved to Github Actions; updated to supported PHP versions
 - `InputObjectTestTrait` no longer provides `::covers` annotations, as that is semi-deprecated in newer PHPUnit versions
