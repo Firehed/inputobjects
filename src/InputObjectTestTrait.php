@@ -5,12 +5,13 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 use UnexpectedValueException;
 
+/**
+ * Trait that can be used in any PHPUnit TestCase
+ */
 trait InputObjectTestTrait
 {
     /**
      * Provide the input object to test
-     *
-     * @return \Firehed\Input\Objects\InputObject
      */
     abstract protected function getInputObject(): InputObject;
 
@@ -19,7 +20,7 @@ trait InputObjectTestTrait
      *
      * Should return an array of [input, expected_output]
      *
-     * @return array
+     * @return array{mixed, mixed}
      */
     abstract public function evaluations(): array;
 
@@ -28,7 +29,7 @@ trait InputObjectTestTrait
      *
      * Should return an arrat of [invalid_input]
      *
-     * @return array
+     * @return array{mixed}
      */
     abstract public function invalidEvaluations(): array;
 
@@ -68,15 +69,18 @@ trait InputObjectTestTrait
     {
         $inputObject = $this->getInputObject();
         if (is_object($expected_output)) {
-            $assert = [$this, 'assertEquals'];
+            $this->assertEquals(
+                $expected_output,
+                $inputObject->setValue($input_value)->evaluate(),
+                'Evaluated value did not match the expected output'
+            );
         } else {
-            $assert = [$this, 'assertSame'];
+            $this->assertSame(
+                $expected_output,
+                $inputObject->setValue($input_value)->evaluate(),
+                'Evaluated value did not match the expected output'
+            );
         }
-        $assert(
-            $expected_output,
-            $inputObject->setValue($input_value)->evaluate(),
-            'Evaluated value did not match the expected output'
-        );
     } // testEvaluate
 
     /**
