@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Literal
  * @covers ::<protected>
@@ -12,19 +14,19 @@ class LiteralTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    protected function getInputObject()
+    protected function getInputObject(): InputObject
     {
         return new Literal('some string');
     }
 
-    public function evaluations()
+    public function evaluations(): array
     {
         return [
             ['some string', 'some string'],
         ];
     }
 
-    public function invalidEvaluations()
+    public function invalidEvaluations(): array
     {
         return [
             ['some string '],

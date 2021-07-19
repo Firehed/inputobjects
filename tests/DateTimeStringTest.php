@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -16,12 +18,12 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    public function getInputObject()
+    public function getInputObject(): InputObject
     {
         return new DateTimeString();
     }
 
-    public function evaluations()
+    public function evaluations(): array
     {
         $cases = array_map(function ($string) {
             return [$string, new DateTimeImmutable($string)];
@@ -32,7 +34,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         return $cases;
     }
 
-    public function invalidEvaluations()
+    public function invalidEvaluations(): array
     {
         return [
             // By default, unixtime should be blocked
@@ -59,7 +61,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
      * @covers ::setReturnMutable
      * @covers ::evaluate
      */
-    public function testSetReturnMutable()
+    public function testSetReturnMutable(): void
     {
         $dt = $this->getInputObject();
         $this->assertSame(
@@ -79,7 +81,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @covers ::evaluate
      */
-    public function testSetAllowUnixtime()
+    public function testSetAllowUnixtime(): void
     {
         $dt = $this->getInputObject();
         $this->assertSame(
@@ -97,7 +99,7 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
     }
 
     /** @covers ::__construct */
-    public function testCustomFormats()
+    public function testCustomFormats(): void
     {
         $input = '2018-05-09 10:55:30PM';
 

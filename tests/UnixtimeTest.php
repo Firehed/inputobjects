@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 use DateTimeImmutable;
 
 /**
@@ -14,7 +16,7 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    public function getInputObject()
+    public function getInputObject(): InputObject
     {
         return new Unixtime();
     }

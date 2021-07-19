@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\Uuid
  * @covers ::<protected>
@@ -12,7 +14,7 @@ class UuidTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    public function getInputObject()
+    public function getInputObject(): InputObject
     {
         return new Uuid();
     }

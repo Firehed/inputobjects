@@ -11,7 +11,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
 {
 
     private $email;
-    public function setUp()
+    public function setUp(): void
     {
         $this->email = new Email();
     }
@@ -63,7 +63,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @dataProvider values
      */
-    public function testValidate($email, $isValid)
+    public function testValidate($email, $isValid): void
     {
         $this->email->setValue($email);
         $this->assertSame(

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\AnyOf
  * @covers ::<protected>
@@ -12,7 +14,7 @@ class AnyOfTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    protected function getInputObject()
+    protected function getInputObject(): InputObject
     {
         return new AnyOf(
             new Literal(42),
@@ -20,7 +22,7 @@ class AnyOfTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function evaluations()
+    public function evaluations(): array
     {
         return [
             [42, 42],
@@ -28,7 +30,7 @@ class AnyOfTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidEvaluations()
+    public function invalidEvaluations(): array
     {
         return [
             [41],
@@ -40,7 +42,7 @@ class AnyOfTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function testOptionalListOf()
+    public function testOptionalListOf(): void
     {
         $enum = new Enum(['a', 'b', 'c']);
         $io = new AnyOf($enum, new ListOf($enum));

@@ -14,7 +14,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     private $text;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->text = new Text;
     } // setUp
@@ -22,7 +22,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     // Used by:
     // testInvalidMin
     // testInvalidMax
-    public function invalidRangeValues()
+    public function invalidRangeValues(): array
     {
         return [
             [null],
@@ -35,7 +35,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     // Used by:
     // testValidate
-    public function validations()
+    public function validations(): array
     {
         return [
             [null, null, '', true],
@@ -62,7 +62,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     // Used by:
     // testValidMax
     // testValidMin
-    public function validRangeValues()
+    public function validRangeValues(): array
     {
         return [
             [1],
@@ -75,7 +75,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
     // Used by:
     // testValidMaxMinCombinations
-    public function validRangePairs()
+    public function validRangePairs(): array
     {
         return [
             [10, 5],
@@ -89,7 +89,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMax
      * @dataProvider invalidRangeValues
      */
-    public function testInvalidMax($value)
+    public function testInvalidMax($value): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax($value);
@@ -100,7 +100,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMax($value)
+    public function testValidMax($value): void
     {
         $this->assertSame(
             $this->text,
@@ -113,7 +113,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMin
      * @dataProvider invalidRangeValues
      */
-    public function testInvalidMin($value)
+    public function testInvalidMin($value): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMin($value);
@@ -124,7 +124,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @dataProvider validRangeValues
      */
-    public function testValidMin($value)
+    public function testValidMin($value): void
     {
         $this->assertSame(
             $this->text,
@@ -138,7 +138,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMax
      * @covers ::setMin
      */
-    public function testIncompatibleMaxAfterMin()
+    public function testIncompatibleMaxAfterMin(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMin(5)
@@ -149,7 +149,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMax
      * @covers ::setMin
      */
-    public function testIncompatibleMinAfterMax()
+    public function testIncompatibleMinAfterMax(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(4)
@@ -161,7 +161,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::setMin
      * @dataProvider validRangePairs
      */
-    public function testValidMaxMinCombinations($max, $min)
+    public function testValidMaxMinCombinations($max, $min): void
     {
         $this->assertSame(
             $this->text,
@@ -173,7 +173,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMax
      */
-    public function testMaxOfZeroIsDisallowed()
+    public function testMaxOfZeroIsDisallowed(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(0);
@@ -182,7 +182,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setMin
      */
-    public function testMinOfZeroIsAllowed()
+    public function testMinOfZeroIsAllowed(): void
     {
         $this->assertSame(
             $this->text,
@@ -194,7 +194,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::setTrim
      */
-    public function testSetTrimReturnsThis()
+    public function testSetTrimReturnsThis(): void
     {
         $this->assertSame(
             $this->text,
@@ -207,7 +207,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::setTrim
      */
-    public function testTrimDefaultsToFalse()
+    public function testTrimDefaultsToFalse(): void
     {
         $input = ' text with trailing space ';
         $this->assertSame(
@@ -221,7 +221,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::setTrim
      */
-    public function testTrimWorksWhenEnabled()
+    public function testTrimWorksWhenEnabled(): void
     {
         $input = ' text with trailing space ';
         $output = 'text with trailing space';
@@ -236,7 +236,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::evaluate
      * @covers ::setTrim
      */
-    public function testTrimAllowsExplicitFalse()
+    public function testTrimAllowsExplicitFalse(): void
     {
         $input = ' text with trailing space ';
         $this->assertSame(
@@ -249,7 +249,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::validate
      */
-    public function testTrimInteractionWithSetMin()
+    public function testTrimInteractionWithSetMin(): void
     {
         $input = ' ';
         $this->assertFalse(
@@ -266,7 +266,7 @@ class TextTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @dataProvider validations
      */
-    public function testValidate($min, $max, $value, $isValid)
+    public function testValidate($min, $max, $value, $isValid): void
     {
         if ($min !== null) {
             $this->text->setMin($min);

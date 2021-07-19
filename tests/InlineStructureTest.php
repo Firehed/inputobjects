@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
+
 /**
  * @coversDefaultClass Firehed\InputObjects\InlineStructure
  * @covers ::<protected>
@@ -12,7 +14,7 @@ class InlineStructureTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    protected function getInputObject()
+    protected function getInputObject(): InputObject
     {
         return new InlineStructure([
             'r1' => new Boolean(),
@@ -23,7 +25,7 @@ class InlineStructureTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function evaluations()
+    public function evaluations(): array
     {
         return [
             [
@@ -45,7 +47,7 @@ class InlineStructureTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidEvaluations()
+    public function invalidEvaluations(): array
     {
         return [
                 ['r1' => true, 'r2' => 2, 'o1' => null, 'o2' => 'notanemail'],

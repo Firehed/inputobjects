@@ -18,14 +18,14 @@ class NullableTest extends \PHPUnit\Framework\TestCase
     /** @var Nullable */
     private $nullable;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->concrete = $this->createMock(InputObject::class);
         $this->nullable = new Nullable($this->concrete);
     }
 
     /** @covers ::__construct */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(
             InputObject::class,
@@ -37,7 +37,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @covers ::evaluate
      */
-    public function testValidateWithNull()
+    public function testValidateWithNull(): void
     {
         $this->nullable->setValue(null);
         $this->concrete
@@ -57,7 +57,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
      * @covers ::validate
      * @covers ::evaluate
      */
-    public function testEvaluateWithValue()
+    public function testEvaluateWithValue(): void
     {
         $value = random_int(0, PHP_INT_MAX);
         $this->nullable->setValue($value);
@@ -81,7 +81,7 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testInvalidEvaluation()
+    public function testInvalidEvaluation(): void
     {
         $value = random_int(0, PHP_INT_MAX);
         $this->nullable->setValue($value);
