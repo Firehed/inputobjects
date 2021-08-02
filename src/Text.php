@@ -16,16 +16,8 @@ class Text extends InputObject
     /** @var bool */
     private $trim = false;
 
-    /**
-     * @param int $min
-     */
-    public function setMin($min): self
+    public function setMin(int $min): self
     {
-        if (!is_int($min)) {
-            throw new InvalidArgumentException(
-                "Integer required"
-            );
-        }
         if ($min < 0) {
             throw new InvalidArgumentException(
                 "Minimum cannot be less than zero"
@@ -40,18 +32,10 @@ class Text extends InputObject
 
         $this->min = $min;
         return $this;
-    } // setMin
+    }
 
-    /**
-     * @param int $max
-     */
-    public function setMax($max): self
+    public function setMax(int $max): self
     {
-        if (!is_int($max)) {
-            throw new InvalidArgumentException(
-                "Integer required"
-            );
-        }
         if ($max <= 0) {
             throw new InvalidArgumentException(
                 "Maximum cannot be less than one"
@@ -64,7 +48,7 @@ class Text extends InputObject
         }
         $this->max = $max;
         return $this;
-    } // setMax
+    }
 
     public function setTrim(bool $shouldTrim): self
     {

@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
 use Money\Currency;
 use Money\Money as BaseMoney;
 
@@ -15,15 +17,17 @@ use Money\Money as BaseMoney;
  */
 class MoneyTest extends \PHPUnit\Framework\TestCase
 {
-
     use InputObjectTestTrait;
 
-    protected function getInputObject()
+    protected function getInputObject(): InputObject
     {
         return new Money();
     }
 
-    public function evaluations()
+    /**
+     * @return array{array{amount: mixed, currency: string}, BaseMoney}[]
+     */
+    public function evaluations(): array
     {
         return [
             [['amount' => 0, 'currency' => 'XTS'], BaseMoney::XTS(0)],
@@ -34,7 +38,10 @@ class MoneyTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    public function invalidEvaluations()
+    /**
+     * @return array{amount: mixed, currency: mixed}[]
+     */
+    public function invalidEvaluations(): array
     {
         return [
             ['amount' => '', 'currency' => 'XTS'],

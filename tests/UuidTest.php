@@ -1,7 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
+
+use Firehed\Input\Objects\InputObject;
 
 /**
  * @coversDefaultClass Firehed\InputObjects\Uuid
@@ -12,11 +15,14 @@ class UuidTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    public function getInputObject()
+    public function getInputObject(): InputObject
     {
         return new Uuid();
     }
 
+    /**
+     * @return array{string, string}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -37,6 +43,9 @@ class UuidTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [

@@ -15,16 +15,8 @@ class Number extends InputObject
     /** @var ?float */
     private $max = null;
 
-    /**
-     * @param float $min
-     */
-    public function setMin($min): self
+    public function setMin(float $min): self
     {
-        if (!is_int($min) && !is_float($min)) {
-            throw new InvalidArgumentException(
-                'Minimum must be an integer or float'
-            );
-        }
         if (null !== $this->max && $this->max < $min) {
             throw new InvalidArgumentException(
                 "Minimum cannot be greater than maximum"
@@ -33,18 +25,10 @@ class Number extends InputObject
 
         $this->min = $min;
         return $this;
-    } // setMin
+    }
 
-    /**
-     * @param float $max
-     */
-    public function setMax($max): self
+    public function setMax(float $max): self
     {
-        if (!is_int($max) && !is_float($max)) {
-            throw new InvalidArgumentException(
-                'Maximum must be an integer or float'
-            );
-        }
         if (null !== $this->min && $this->min > $max) {
             throw new InvalidArgumentException(
                 "Maximum cannot be less than minimum"
@@ -52,7 +36,7 @@ class Number extends InputObject
         }
         $this->max = $max;
         return $this;
-    } // setMax
+    }
 
     /**
      * @param mixed $value
@@ -70,6 +54,7 @@ class Number extends InputObject
         // blocks decimal points and negative signs, and there's no practical
         // way to do the check with casting alone.
         $value = (string)$value;
+        // @phpstan-ignore-next-line
         if (!preg_match('/^-?[0-9]*\.?[0-9]+$/', $value)) {
             return false;
         }
@@ -85,10 +70,10 @@ class Number extends InputObject
             }
         }
         return true;
-    } // validate
+    }
 
     public function evaluate()
     {
         return $this->getValue() + 0;
-    } // evaluate
+    }
 }

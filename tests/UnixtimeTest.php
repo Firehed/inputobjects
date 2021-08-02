@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
 
+use Firehed\Input\Objects\InputObject;
 use DateTimeImmutable;
 
 /**
@@ -14,11 +16,14 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
 {
     use InputObjectTestTrait;
 
-    public function getInputObject()
+    public function getInputObject(): InputObject
     {
         return new Unixtime();
     }
 
+    /**
+     * @return array{mixed, DateTimeImmutable}[]
+     */
     public function evaluations(): array
     {
         return [
@@ -37,6 +42,9 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    /**
+     * @return array{mixed}[]
+     */
     public function invalidEvaluations(): array
     {
         return [
@@ -53,43 +61,39 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
      * @covers ::__construct
      * @covers ::getDefaultValue
      */
-    public function testConstructWithNothing()
+    public function testConstructWithNothing(): void
     {
         $ut = new Unixtime();
-        $this->assertNull($ut->getDefaultValue());
+        self::assertNull($ut->getDefaultValue());
     }
 
     /**
      * @covers ::__construct
      * @covers ::getDefaultValue
      */
-    public function testConstructWithFalse()
+    public function testConstructWithFalse(): void
     {
         $ut = new Unixtime(false);
-        $this->assertNull($ut->getDefaultValue());
+        self::assertNull($ut->getDefaultValue());
     }
 
     /**
      * @covers ::__construct
      * @covers ::getDefaultValue
      */
-    public function testConstructWithTrue()
+    public function testConstructWithTrue(): void
     {
         $ut = new Unixtime(true);
         $dt = $ut->getDefaultValue();
-        $this->assertInstanceOf(DateTimeImmutable::class, $dt);
+        assert($dt instanceof DateTimeImmutable);
         $diff = $dt->diff(new DateTimeImmutable());
         // On an absurdly slow system this test could fail, so this gives it
         // a little flexibility
-        if (version_compare(PHP_VERSION, '7.1.0', '>=')) {
-            $this->assertTrue(($diff->s + $diff->f) < 1, 'Should have been < 1sec from now');
-        } else {
-            $this->assertTrue($diff->s < 2, 'Should have been one second or less difference');
-        }
-        $this->assertSame(0, $diff->i, 'Minutes != 0');
-        $this->assertSame(0, $diff->h, 'Hours != 0');
-        $this->assertSame(0, $diff->d, 'Days != 0');
-        $this->assertSame(0, $diff->m, 'Months != 0');
-        $this->assertSame(0, $diff->y, 'Years != 0');
+        self::assertTrue(($diff->s + $diff->f) < 1, 'Should have been < 1sec from now');
+        self::assertSame(0, $diff->i, 'Minutes != 0');
+        self::assertSame(0, $diff->h, 'Hours != 0');
+        self::assertSame(0, $diff->d, 'Days != 0');
+        self::assertSame(0, $diff->m, 'Months != 0');
+        self::assertSame(0, $diff->y, 'Years != 0');
     }
 }

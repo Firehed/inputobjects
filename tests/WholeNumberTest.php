@@ -12,9 +12,9 @@ class WholeNumberTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers ::__construct
      */
-    public function testDeprecationWarning()
+    public function testDeprecationWarning(): void
     {
-        $this->expectException(\PHPUnit\Framework\Error\Deprecated::class);
+        self::expectDeprecation();
         new WholeNumber();
     }
 }

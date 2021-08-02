@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Firehed\InputObjects;
@@ -19,9 +20,12 @@ class AnyTest extends \PHPUnit\Framework\TestCase
         return new Any();
     }
 
+    /**
+     * @return array{mixed, mixed}[]
+     */
     public function evaluations(): array
     {
-        return array_map(function ($any) {
+        return array_map(function ($any): array {
             return [$any, $any];
         }, [
             null,
@@ -38,8 +42,11 @@ class AnyTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
+    /**
+     * @return never
+     */
     public function invalidEvaluations(): array
     {
-        $this->markTestSkipped('It should be impossible to make this fail validation');
+        self::markTestSkipped('It should be impossible to make this fail validation');
     }
 }
