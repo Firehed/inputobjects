@@ -106,7 +106,10 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($target, $retInt, 'Unixtime int did not evaluate correctly');
     }
 
-    public function fractionalUnixtimeProvider()
+    /**
+     * @return array{string|float, bool, DateTimeInterface}[]
+     */
+    public function fractionalUnixtimeProvider(): array
     {
         return [
             // Mutable, as string
@@ -121,6 +124,12 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
             [1594344367.126, true, new DateTime('2020-07-10T01:26:07.126+00:00')],
             [1594344367.999, true, new DateTime('2020-07-10T01:26:07.999+00:00')],
             [1594344367.999999, true, new DateTime('2020-07-10T01:26:07.999999+00:00')],
+            // Mutable, as ISO string
+            ['2020-07-10T01:26:07.000001+00:00', true, new DateTime('2020-07-10T01:26:07.000001+00:00')],
+            ['2020-07-10T01:26:07.001+00:00', true, new DateTime('2020-07-10T01:26:07.001+00:00')],
+            ['2020-07-10T01:26:07.126+00:00', true, new DateTime('2020-07-10T01:26:07.126+00:00')],
+            ['2020-07-10T01:26:07.999+00:00', true, new DateTime('2020-07-10T01:26:07.999+00:00')],
+            ['2020-07-10T01:26:07.999999+00:00', true, new DateTime('2020-07-10T01:26:07.999999+00:00')],
             // Simple test to make sure immutable version works. Same code
             // path.
             ['1594344367.126', false, new DateTimeImmutable('2020-07-10T01:26:07.126+00:00')],
@@ -133,17 +142,19 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
      *
      * @covers ::evaluate
      * @dataProvider fractionalUnixtimeProvider
+     * @param string|float $value
      */
-    public function testFractionalUnixtimeBug34($value, $returnMutable, DateTimeInterface $expected)
+    public function testFractionalUnixtimeBug34($value, bool $returnMutable, DateTimeInterface $expected): void
     {
         $dt = $this->getInputObject();
+        assert($dt instanceof DateTimeString);
         $dt->setAllowUnixtime(true);
         $dt->setReturnMutable($returnMutable);
 
         $ret = $dt->setValue($value)->evaluate();
-        $this->assertInstanceOf(DateTimeInterface::class, $ret);
+        self::assertInstanceOf(DateTimeInterface::class, $ret);
 
-        $this->assertEquals($expected, $ret, 'Unixtime string with fraction did not evaluate correctly');
+        self::assertEquals($expected, $ret, 'Unixtime string with fraction did not evaluate correctly');
     }
 
     /** @covers ::__construct */

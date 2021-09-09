@@ -9,6 +9,9 @@ use DateTimeImmutable;
 use DateInterval;
 use Firehed\Input\Objects\InputObject;
 
+use function is_numeric;
+use function is_string;
+
 /**
  * Validator for various string representations of a DateTime object.
  *
@@ -88,16 +91,18 @@ class DateTimeString extends InputObject
     {
         $value = $this->getValue();
         $offset = null;
+        // var_dump($value);
         if (is_numeric($value)) {
             $seconds = (int)$value;
-            // Intentionally loose equality here: looking for fractional part
-            if ($seconds != $value) {
-                $parts = explode('.', (string)$value, 2);
-                assert(count($parts) === 2);
-                // Yes, this is quite clumsy. It's also the most
-                // straightforward way to get the fraction part while avoiding
-                // (most?) floating point errors, which fmod may introduce.
-                $fraction = (float)('0.' . $parts[1]);
+            $fraction = fmod((float)$value, 1.0);
+            var_dump($fraction);
+            if ($fraction !== 0.0) {
+                // $parts = explode('.', (string)$value, 2);
+                // assert(count($parts) === 2);
+                // // Yes, this is quite clumsy. It's also the most
+                // // straightforward way to get the fraction part while avoiding
+                // // (most?) floating point errors, which fmod may introduce.
+                // $fraction = (float)('0.' . $parts[1]);
 
                 $offset = new DateInterval('PT0S');
                 $offset->f = $fraction;
@@ -111,7 +116,7 @@ class DateTimeString extends InputObject
         } else {
             $response = new DateTimeImmutable($value);
         }
-        if ($offset) {
+        if ($offset !== null) {
             $response = $response->add($offset);
         }
         return $response;
