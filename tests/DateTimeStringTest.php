@@ -10,9 +10,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\DateTimeString
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\DateTimeString
  */
 class DateTimeStringTest extends \PHPUnit\Framework\TestCase
 {
@@ -63,10 +61,6 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @covers ::setReturnMutable
-     * @covers ::evaluate
-     */
     public function testSetReturnMutable(): void
     {
         $dt = $this->getInputObject();
@@ -83,11 +77,6 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         self::assertNotInstanceOf(DateTimeImmutable::class, $ret);
     }
 
-    /**
-     * @covers ::setAllowUnixtime
-     * @covers ::validate
-     * @covers ::evaluate
-     */
     public function testSetAllowUnixtime(): void
     {
         $dt = $this->getInputObject();
@@ -106,7 +95,6 @@ class DateTimeStringTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($target, $retInt, 'Unixtime int did not evaluate correctly');
     }
 
-    /** @covers ::__construct */
     public function testCustomFormats(): void
     {
         $input = '2018-05-09 10:55:30PM';

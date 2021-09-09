@@ -7,14 +7,11 @@ use PHPUnit\Framework\MockObject\Stub\ConsecutiveCalls as OCC;
 use UnexpectedValueException;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\ListOf
+ * @covers Firehed\InputObjects\ListOf
  */
 class ListOfTest extends \PHPUnit\Framework\TestCase
 {
 
-    /**
-     * @covers ::__construct
-     */
     public function testConstruct(): void
     {
         $io = $this->getMockForAbstractClass(InputObject::class);
@@ -26,7 +23,6 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::validate
      * @dataProvider values
      * @param string[] $input
      * @param bool[] $mock_returns
@@ -55,7 +51,6 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::evaluate
      * @dataProvider values
      * @param string[] $input
      * @param bool[] $mock_returns
@@ -93,7 +88,6 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider nonLists
-     * @covers ::validate
      * @param mixed $non_list
      */
     public function testNonListsAreRejected($non_list): void
@@ -106,9 +100,6 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
         self::assertFalse($list_of->isValid());
     }
 
-    /**
-     * @covers ::setSeparator
-     */
     public function testSetSeapratorReturnsThis(): void
     {
         $io = $this->createMock(InputObject::class);
@@ -117,9 +108,6 @@ class ListOfTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setSeparator
-     * @covers ::validate
-     * @covers ::evaluate
      * @dataProvider separatorValues
      * @param mixed[] $output
      */

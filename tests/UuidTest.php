@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Uuid
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Uuid
  */
 class UuidTest extends \PHPUnit\Framework\TestCase
 {

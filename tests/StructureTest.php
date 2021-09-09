@@ -6,16 +6,11 @@ use Firehed\Input\Objects\InputObject;
 use Firehed\Input\Exceptions\InputException;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Structure
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Structure
  * */
 class StructureTest extends \PHPUnit\Framework\TestCase
 {
 
-    /**
-     * @covers ::evaluate
-     */
     public function testExecuteValidData(): void
     {
         $structure = $this->getMockForAbstractClass(Structure::class);
@@ -33,9 +28,6 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::evaluate
-     */
     public function testExecuteInvalidData(): void
     {
         $structure = $this->getMockForAbstractClass(Structure::class);
@@ -50,9 +42,6 @@ class StructureTest extends \PHPUnit\Framework\TestCase
         $structure->setValue(['string' => 123])->evaluate();
     }
 
-    /**
-     * @covers ::evaluate
-     */
     public function testExecuteWithVariousInputErrors(): void
     {
         $required = [

@@ -3,15 +3,10 @@
 namespace Firehed\InputObjects;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\WholeNumber
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\WholeNumber
  */
 class WholeNumberTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers ::__construct
-     */
     public function testDeprecationWarning(): void
     {
         self::expectDeprecation();

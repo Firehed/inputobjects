@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Nullable
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Nullable
  */
 class NullableTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,7 +22,6 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         $this->nullable = new Nullable($this->concrete);
     }
 
-    /** @covers ::__construct */
     public function testConstruct(): void
     {
         self::assertInstanceOf(
@@ -33,10 +30,6 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::validate
-     * @covers ::evaluate
-     */
     public function testValidateWithNull(): void
     {
         $this->nullable->setValue(null);
@@ -53,10 +46,6 @@ class NullableTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::validate
-     * @covers ::evaluate
-     */
     public function testEvaluateWithValue(): void
     {
         $value = random_int(0, PHP_INT_MAX);

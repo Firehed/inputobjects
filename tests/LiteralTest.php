@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Literal
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Literal
  */
 class LiteralTest extends \PHPUnit\Framework\TestCase
 {

@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Boolean
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Boolean
  */
 class BooleanTest extends \PHPUnit\Framework\TestCase
 {

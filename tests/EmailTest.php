@@ -3,9 +3,7 @@
 namespace Firehed\InputObjects;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Email
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Email
  */
 class EmailTest extends \PHPUnit\Framework\TestCase
 {
@@ -63,7 +61,6 @@ class EmailTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::validate
      * @dataProvider values
      */
     public function testValidate(string $email, bool $isValid): void
