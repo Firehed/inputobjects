@@ -9,11 +9,7 @@ use Money\Currency;
 use Money\Money as BaseMoney;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Money
- * @covers ::<protected>
- * @covers ::<private>
- * @covers ::getRequiredInputs
- * @covers ::getOptionalInputs
+ * @covers Firehed\InputObjects\Money
  */
 class MoneyTest extends \PHPUnit\Framework\TestCase
 {

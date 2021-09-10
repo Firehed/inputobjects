@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Integer
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Integer
  */
 class IntegerTest extends \PHPUnit\Framework\TestCase
 {
@@ -99,9 +97,6 @@ class IntegerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMax
-     * @covers ::setMin
-     * @covers ::validate
      * @dataProvider validations
      * @param mixed $value
      */

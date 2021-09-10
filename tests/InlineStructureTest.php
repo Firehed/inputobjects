@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\InlineStructure
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\InlineStructure
  */
 class InlineStructureTest extends \PHPUnit\Framework\TestCase
 {

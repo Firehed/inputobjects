@@ -8,9 +8,7 @@ use Firehed\Input\Objects\InputObject;
 use DateTimeImmutable;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Unixtime
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Unixtime
  */
 class UnixtimeTest extends \PHPUnit\Framework\TestCase
 {
@@ -57,30 +55,18 @@ class UnixtimeTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::getDefaultValue
-     */
     public function testConstructWithNothing(): void
     {
         $ut = new Unixtime();
         self::assertNull($ut->getDefaultValue());
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::getDefaultValue
-     */
     public function testConstructWithFalse(): void
     {
         $ut = new Unixtime(false);
         self::assertNull($ut->getDefaultValue());
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::getDefaultValue
-     */
     public function testConstructWithTrue(): void
     {
         $ut = new Unixtime(true);

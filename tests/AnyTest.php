@@ -7,9 +7,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Any
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Any
  */
 class AnyTest extends \PHPUnit\Framework\TestCase
 {

@@ -5,9 +5,7 @@ namespace Firehed\InputObjects;
 use Firehed\Input\Objects\InputObject;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Enum
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Enum
  */
 class EnumTest extends \PHPUnit\Framework\TestCase
 {

@@ -6,9 +6,7 @@ use InvalidArgumentException;
 use UnexpectedValueException;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Number
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Number
  */
 class NumberTest extends \PHPUnit\Framework\TestCase
 {
@@ -125,8 +123,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMax
-     * @covers ::validate
      * @dataProvider validRangeValues
      */
     public function testValidMax(int $value): void
@@ -139,8 +135,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMin
-     * @covers ::validate
      * @dataProvider validRangeValues
      */
     public function testValidMin(int $value): void
@@ -152,10 +146,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::setMax
-     * @covers ::setMin
-     */
     public function testIncompatibleMaxAfterMin(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -163,10 +153,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
             ->setMax(4);
     }
 
-    /**
-     * @covers ::setMax
-     * @covers ::setMin
-     */
     public function testIncompatibleMinAfterMax(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -175,8 +161,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMax
-     * @covers ::setMin
      * @dataProvider validRangePairs
      */
     public function testValidMaxMinCombinations(int $max, int $min): void
@@ -189,9 +173,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMax
-     * @covers ::setMin
-     * @covers ::validate
      * @dataProvider validations
      * @param mixed $value
      */
@@ -212,7 +193,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::evaluate
      * @dataProvider evaluations
      * @param mixed $input_value
      * @param int|float $expected_output
@@ -227,7 +207,6 @@ class NumberTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::evaluate
      * @dataProvider invalidEvaluations
      * @param mixed $input_value
      */

@@ -5,9 +5,7 @@ namespace Firehed\InputObjects;
 use InvalidArgumentException;
 
 /**
- * @coversDefaultClass Firehed\InputObjects\Text
- * @covers ::<protected>
- * @covers ::<private>
+ * @covers Firehed\InputObjects\Text
  */
 class TextTest extends \PHPUnit\Framework\TestCase
 {
@@ -80,8 +78,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMax
-     * @covers ::validate
      * @dataProvider validRangeValues
      */
     public function testValidMax(int $value): void
@@ -94,8 +90,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMin
-     * @covers ::validate
      * @dataProvider validRangeValues
      */
     public function testValidMin(int $value): void
@@ -108,10 +102,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    /**
-     * @covers ::setMax
-     * @covers ::setMin
-     */
     public function testIncompatibleMaxAfterMin(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -119,10 +109,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
             ->setMax(4);
     }
 
-    /**
-     * @covers ::setMax
-     * @covers ::setMin
-     */
     public function testIncompatibleMinAfterMax(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -131,8 +117,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers ::setMax
-     * @covers ::setMin
      * @dataProvider validRangePairs
      */
     public function testValidMaxMinCombinations(int $max, int $min): void
@@ -144,18 +128,12 @@ class TextTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::setMax
-     */
     public function testMaxOfZeroIsDisallowed(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->text->setMax(0);
     }
 
-    /**
-     * @covers ::setMin
-     */
     public function testMinOfZeroIsAllowed(): void
     {
         self::assertSame(
@@ -165,9 +143,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::setTrim
-     */
     public function testSetTrimReturnsThis(): void
     {
         self::assertSame(
@@ -177,10 +152,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::evaluate
-     * @covers ::setTrim
-     */
     public function testTrimDefaultsToFalse(): void
     {
         $input = ' text with trailing space ';
@@ -191,10 +162,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::evaluate
-     * @covers ::setTrim
-     */
     public function testTrimWorksWhenEnabled(): void
     {
         $input = ' text with trailing space ';
@@ -206,10 +173,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::evaluate
-     * @covers ::setTrim
-     */
     public function testTrimAllowsExplicitFalse(): void
     {
         $input = ' text with trailing space ';
@@ -220,9 +183,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @covers ::validate
-     */
     public function testTrimInteractionWithSetMin(): void
     {
         $input = ' ';
@@ -234,10 +194,6 @@ class TextTest extends \PHPUnit\Framework\TestCase
 
 
     /**
-     * @covers ::setMax
-     * @covers ::setMin
-     * @covers ::evaluate
-     * @covers ::validate
      * @dataProvider validations
      * @param mixed $value
      */
