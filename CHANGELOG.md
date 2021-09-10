@@ -4,17 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.0.0] - Unreleased
+## [3.3.0] - 2021-09-10
 ### Summary
 Library updated for modern PHP versions & community coding standards
 
 ### Changed
 - PHP >= 7.4 is now required
 - CI moved to Github Actions; updated to supported PHP versions (including PHP 8)
-- [**BREAKING**] Native type hints were added in many locations.
+- Native type hints were added in many locations.
   In practice none should actaully be BC breaks, but you may now receive a
   native `TypeError` where previously an `InvalidArgumentException` would have
   been thrown.
+  As all of the situations where this would occur were already usage errors,
+  this will not be treated as a breaking change for versioning purposes.
 - Code (mostly) updated to PSR-12 formatting.
 - Tests are no longer exported, so the `tests/` directory will not be included
   unless the library is installed using Composer's `--prefer-source` flag.
@@ -23,9 +25,8 @@ Library updated for modern PHP versions & community coding standards
 - `InputObjectTestTrait` no longer provides `::covers` annotations, as that is
   semi-deprecated in newer PHPUnit versions. This may result in code coverage
   changes during unit tests.
-- [**Breaking**, minor] `ListOf::setSeparator()` will now reject an empty string
-  as a separator.
-
+- `ListOf::setSeparator()` will now reject an empty string as a separator.
+  This prevents a downstream error from passing an empty separator to `explode`.
 
 ## [3.2.2] - 2019-02-04
 ### Summary
