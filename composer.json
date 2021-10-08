@@ -21,7 +21,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "firehed/input": "^2.1",
-        "moneyphp/money": "^3.0"
+        "moneyphp/money": "^3.0 || ^4.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.12",
